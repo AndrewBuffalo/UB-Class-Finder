@@ -15,7 +15,6 @@ driver.get("https://www.buffalo.edu/class-schedule?semester=spring")
 #hierarchy for finding an HTML Element is ID -> name -> Class Sss
 try:
     driver.implicitly_wait(5)   
-    #works for one : /html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]
     i = 6
     while( i!= 129):
         table = driver.find_element_by_xpath(f'/html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[{i}]')
@@ -24,10 +23,12 @@ try:
         link_click[0:len(link_click)] = [' '.join(link_click[0:len(link_click)])]
         link_click = link_click[0].split(" ")
         link_click[0:len(link_click)] = [' '.join(link_click[3:-2])]
-        print(link_click)
-        link = driver.find_element_by_link_text(link_click[0])
+        link = driver.find_element_by_link_text(link_click[0]) #getting the string to click on
         link.click()
-        time.sleep(2)
+        #do stuff 
+        #get all of the data 
+
+
         driver.back()
         i+=1
     driver.quit()
@@ -36,4 +37,9 @@ except:
     driver.quit()
 
 
-#main = driver.find_elements(by=By.ID, value= "skip-to-content-link")
+
+def any_available_class(current_time):
+    return 
+
+def is_class_available(room_name):
+    return 
