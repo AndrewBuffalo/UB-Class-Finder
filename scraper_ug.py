@@ -15,8 +15,12 @@ driver.get("https://www.buffalo.edu/class-schedule?semester=spring")
 #hierarchy for finding an HTML Element is ID -> name -> Class Sss
 try:
     driver.implicitly_wait(5)   
-    table = driver.find_element_by_xpath("/html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]")
-    print(table.text)
+    #works for one : /html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]
+    i = 6
+    while( i!= 129):
+        table = driver.find_element_by_xpath(f'/html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[{i}]')
+        print(table.text)
+        i+=1
     driver.quit()
 except:
     print("error")
