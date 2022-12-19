@@ -19,7 +19,16 @@ try:
     i = 6
     while( i!= 129):
         table = driver.find_element_by_xpath(f'/html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[{i}]')
-        print(table.text)
+        link_click = table.text.split(" ")
+        del link_click[-1]
+        link_click[0:len(link_click)] = [' '.join(link_click[0:len(link_click)])]
+        link_click = link_click[0].split(" ")
+        link_click[0:len(link_click)] = [' '.join(link_click[3:-2])]
+        print(link_click)
+        link = driver.find_element_by_link_text(link_click[0])
+        link.click()
+        time.sleep(2)
+        driver.back()
         i+=1
     driver.quit()
 except:
