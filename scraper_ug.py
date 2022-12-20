@@ -17,12 +17,12 @@ driver.get("https://www.buffalo.edu/class-schedule?semester=spring")
 try:
     driver.implicitly_wait(5)   
     i = 6
-    with open("undergraduate_classes.csv","a") as f:
-            fieldnames = ["Class","Course","Title","Section","Type","Days","Time","Room","Location","Instructor (*) Additionl Instructor", "Status"]
+    with open("ub_classes.csv","a",newline= '') as f:
+            fieldnames = ["Class","Course","Title","Section","Type","Days","Time","Room","Location","Instructor (*) Additional Instructor", "Status"]
             writer = csv.DictWriter(f, fieldnames= fieldnames)
             writer.writeheader()
-            print("test")
-            while( i!= 129):
+            #print("test")
+            while( i!= 130):
                 table = driver.find_element_by_xpath(f'/html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[{i}]')
                 link_click = table.text.split(" ")
                 del link_click[-1]
@@ -43,8 +43,19 @@ try:
                             #fix by merging
                             rows[9:-1] = [' '.join(rows[9:-1])]
                         #ALL rows are 11 columns right now so transfer to csv by writerowing
-                        for div in rows:
-                            writer.writerow(div)
+                        writer.writerow({ 
+                        'Class': f'{rows[0].replace("  ", "")}' ,  
+                        'Course': f'{rows[1]}', 
+                        'Title': f'{rows[2]}',
+                        'Section': f'{rows[3]}',
+                        'Type':f'{rows[4]}',
+                        'Days':f'{rows[5]}',
+                        'Time':f'{rows[6]}',
+                        'Room':f'{rows[7]}',
+                        'Location':f'{rows[8]}',
+                        'Instructor (*) Additional Instructor':f'{rows[9]}',
+                        'Status':f'{rows[10]}'
+                          })
                     counter +=1
                 driver.back()
                 i+=1
