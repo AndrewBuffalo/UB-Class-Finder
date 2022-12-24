@@ -57,7 +57,7 @@ with open("ub_classes.csv","w",newline= '') as f:
                 writer.writerow((line[0],line[1],line[2],line[3],line[4],line[5],line[6],col_7[0],line[8],line[9],line[10]))
                 writer.writerow((line[0],line[1],line[2],line[3],line[4],line[5],line[6],col_7[1],line[8],line[9],line[10]))
                 slash_times+=1
-        print(slash_times)
+        #print(slash_times)
 
 #BAD ROOMS:
 #Remote
@@ -73,3 +73,14 @@ with open("ub_classes.csv","w",newline= '') as f:
 #To Be Determined
 #Off Campus - Overseas
 #To Be Determined (HealthSci)
+with open("ub_classes_db.csv", "w", newline= '') as w:
+    with open("ub_classes.csv") as r:
+        reader = csv.reader(r)
+        writer = csv.writer(w)
+        for line in reader:
+            old_time = line[6]
+            old_time_space = old_time.split(" ")
+            beginning = old_time_space[1] + " " + old_time_space[2]
+            ending = old_time_space[4] + " " + old_time_space[5]
+            #print(beginning, ending)
+            writer.writerow((line[0],line[1],line[2],line[3],line[4],line[5],beginning,ending,line[7],line[8],line[9],line[10]))

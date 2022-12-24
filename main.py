@@ -20,6 +20,7 @@ from datetime import datetime
 #strpdate converts from STRING TO OBJECT
 
 time = "5:00 PM- 5:50 PM" #I REMOVED A SPACE
+#CHANGE CSV FROM " 1:00 PM - 1:50 PM" TO "1:00 PM" AND "1:50 PM"
 #d = datetime.strptime(time, "%H:%M:%S")
 time = time.split("-")
 #print(time[0])
