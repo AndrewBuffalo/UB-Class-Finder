@@ -611,6 +611,8 @@
 21609,CIE 491LEC,Construction Estimating,000,LEC,T R, 9:30 AM - 10:50 AM,Frnczk 454,North Campus, Mohan,Closed
 13528,CIE 493LEC,Project Management,000,LEC,T R, 3:30 PM - 4:50 PM,Nsc 228,North Campus, Mohan,Open
 18027,CL 100LEC,Arc&rediscov/classic World,TROT,LEC,M W F, 11:00 AM - 11:50 AM,Academ 355,North Campus, Staff,Open
+20556,CL 110LEC,Latest News Ancient World,MCG1,LEC,T R, 9:30 AM - 10:50 AM,Grein 134C,North Campus, * Mcguire,Open
+20556,CL 110LEC,Latest News Ancient World,MCG1,LEC,T R, 9:30 AM - 10:50 AM,Grein 135C,North Campus, * Mcguire,Open
 18029,CL 112LEC,Stone Axe To Tank,1,LEC,T R, 9:30 AM - 10:50 AM,Academ 170,North Campus, * Boyd,Open
 18030,CL 112LEC,Stone Axe To Tank,2,LEC,T R, 12:30 PM - 1:50 PM,Academ 170,North Campus, * Boyd,Closed
 14951,CL 113LEC,Myth & Religion Anc World,WOO,LEC,T R, 12:30 PM - 1:50 PM,Knox 109,North Campus, Woodard,Open
@@ -866,6 +868,8 @@
 20580,DAC 104LEC,Appreciating Dance,CK,LEC,T R, 11:00 AM - 12:20 PM,Bell 138,North Campus, Boyd  * Walter,Open
 23731,DAC 119LEC,World Dance I,OPEN,LEC,M W, 9:00 AM - 10:20 AM,Cfa B83,North Campus, Ikechukwu,Open
 23742,DAC 128LEC,Jazz Dance Technique 2,OPEN,LEC,T R, 12:30 PM - 1:50 PM,Cfa B83,North Campus, Boyd,Open
+22188,DAC 199SEM,Ub Seminar-The Art Of Motion,KG,SEM,M W, 11:00 AM - 12:20 PM,Academ 102,North Campus, Golde,Open
+22188,DAC 199SEM,Ub Seminar-The Art Of Motion,KG,SEM,M W, 11:00 AM - 12:20 PM,Academ 102A,North Campus, Golde,Open
 18011,DAC 202LEC,Modern Dance 2,MAJ,LEC,T R, 12:30 PM - 1:50 PM,Cfa B84,North Campus, Zavrel,Open w/ Reserves
 20541,DAC 211LEC,Tap Dance 2,MDW,LEC,T R, 2:00 PM - 3:20 PM,Cfa B82,North Campus, Deeb Weaver,Open w/ Reserves
 18111,DAC 214LEC,Ballet 2,MAJ,LEC,M W, 9:00 AM - 10:20 AM,Cfa B84,North Campus, Fornarola,Open w/ Reserves
@@ -947,6 +951,18 @@
 19755,ELP 405LEC,Sociology Of Education,C,LEC,W, 3:00 PM - 5:40 PM,Park 145,North Campus, Reeb,Open w/ Reserves
 20455,ELP 405LEC,Sociology Of Education,D,LEC,T, 4:10 PM - 6:50 PM,Frnczk 408,North Campus, Reeb,Open w/ Reserves
 <<<>>>,EE 178LLB,Digital Principles,000,LEC,M W F, 12:00 PM - 12:50 PM,Davis 101,North Campus, Langberg,Open
+17686,EE 178LLB,Digital Principles,L1,LAB,M, 10:00 AM - 11:50 AM,Furnas 416,North Campus, Langberg,Open
+17686,EE 178LLB,Digital Principles,L1,LAB,M, 10:00 AM - 11:50 AM,Furnas 417,North Campus, Langberg,Open
+17687,EE 178LLB,Digital Principles,L2,LAB,M, 2:00 PM - 3:50 PM,Furnas 416,North Campus, Langberg,Open
+17687,EE 178LLB,Digital Principles,L2,LAB,M, 2:00 PM - 3:50 PM,Furnas 417,North Campus, Langberg,Open
+17688,EE 178LLB,Digital Principles,L3,LAB,T, 10:00 AM - 11:50 AM,Furnas 416,North Campus, Langberg,Open
+17688,EE 178LLB,Digital Principles,L3,LAB,T, 10:00 AM - 11:50 AM,Furnas 417,North Campus, Langberg,Open
+17689,EE 178LLB,Digital Principles,L4,LAB,W, 2:00 PM - 3:50 PM,Furnas 416,North Campus, Langberg,Open
+17689,EE 178LLB,Digital Principles,L4,LAB,W, 2:00 PM - 3:50 PM,Furnas 417,North Campus, Langberg,Open
+17690,EE 178LLB,Digital Principles,L5,LAB,R, 10:00 AM - 11:50 AM,Furnas 416,North Campus, Langberg,Open
+17690,EE 178LLB,Digital Principles,L5,LAB,R, 10:00 AM - 11:50 AM,Furnas 417,North Campus, Langberg,Open
+18562,EE 178LLB,Digital Principles,L6,LAB,F, 10:00 AM - 11:50 AM,Furnas 416,North Campus, Langberg,Open
+18562,EE 178LLB,Digital Principles,L6,LAB,F, 10:00 AM - 11:50 AM,Furnas 417,North Campus, Langberg,Open
 <<<>>>,EE 202LR,Circuit Analysis,000,LEC,T R, 9:30 AM - 10:50 AM,Nsc 222,North Campus, Vandrevala,Open
 18271,EE 202LR,Circuit Analysis,R1,REC,M, 6:00 PM - 6:50 PM,Cfa 144,North Campus, Vandrevala,Open
 18272,EE 202LR,Circuit Analysis,R2,REC,T, 2:00 PM - 2:50 PM,Capen 240,North Campus, Vandrevala,Open
@@ -961,6 +977,18 @@
 10524,EE 311LLB,Electronic Devs & Circs 2,L4,LAB,W, 12:00 PM - 1:50 PM,Furnas 213,North Campus, Oh,Closed
 16270,EE 336LEC,Fundamentals Of Energy Systems,000,LEC,M W, 3:30 PM - 4:50 PM,Knox 104,North Campus, Yao,Open
 <<<>>>,EE 353LLB,Electronic Circuits,000,LEC,F, 10:00 AM - 10:50 AM,Davis 101,North Campus, Burke,Open
+13841,EE 353LLB,Electronic Circuits,L1,LAB,M, 5:00 PM - 8:50 PM,Furnas 416,North Campus, Burke,Closed
+13841,EE 353LLB,Electronic Circuits,L1,LAB,M, 5:00 PM - 8:50 PM,Furnas 417,North Campus, Burke,Closed
+13842,EE 353LLB,Electronic Circuits,L2,LAB,T, 5:00 PM - 8:50 PM,Furnas 416,North Campus, Burke,Open
+13842,EE 353LLB,Electronic Circuits,L2,LAB,T, 5:00 PM - 8:50 PM,Furnas 417,North Campus, Burke,Open
+13845,EE 353LLB,Electronic Circuits,L3,LAB,W, 5:00 PM - 8:50 PM,Furnas 416,North Campus, Burke,Open
+13845,EE 353LLB,Electronic Circuits,L3,LAB,W, 5:00 PM - 8:50 PM,Furnas 417,North Campus, Burke,Open
+13847,EE 353LLB,Electronic Circuits,L4,LAB,R, 5:00 PM - 8:50 PM,Furnas 416,North Campus, Burke,Open
+13847,EE 353LLB,Electronic Circuits,L4,LAB,R, 5:00 PM - 8:50 PM,Furnas 417,North Campus, Burke,Open
+18561,EE 353LLB,Electronic Circuits,L5,LAB,F, 12:00 PM - 3:50 PM,Furnas 416,North Campus, Burke,Closed
+18561,EE 353LLB,Electronic Circuits,L5,LAB,F, 12:00 PM - 3:50 PM,Furnas 417,North Campus, Burke,Closed
+24104,EE 353LLB,Electronic Circuits,L6,LAB,F, 4:00 PM - 7:50 PM,Furnas 416,North Campus, Burke,Open
+24104,EE 353LLB,Electronic Circuits,L6,LAB,F, 4:00 PM - 7:50 PM,Furnas 417,North Campus, Burke,Open
 <<<>>>,EE 379LLB,Embedded Systems And Applicati,000,LEC,T R, 8:00 AM - 9:20 AM,Davis 101,North Campus, Fritz,Open
 15910,EE 379LLB,Embedded Systems And Applicati,L1,LAB,T, 10:00 AM - 11:50 AM,Furnas 213,North Campus, Fritz,Closed
 18136,EE 379LLB,Embedded Systems And Applicati,L2,LAB,W, 9:00 AM - 10:50 AM,Furnas 213,North Campus, Fritz,Open
@@ -2079,6 +2107,36 @@
 16139,MAE 311LEC,Machines & Mechanisms 1,B,LEC,T R, 11:00 AM - 12:20 PM,Obrian 109,North Campus, Khan,Closed
 16140,MAE 311LEC,Machines & Mechanisms 1,C,LEC,T R, 2:00 PM - 3:20 PM,Nsc 228,North Campus, Khan,Open
 <<<>>>,MAE 334LLB,Mae Laboratory I,000,LEC,F, 1:00 PM - 1:50 PM,Norton 190,North Campus, Estes  * St. Pierre,Open
+14864,MAE 334LLB,Mae Laboratory I,L01,LAB,M, 2:00 PM - 4:20 PM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+14864,MAE 334LLB,Mae Laboratory I,L01,LAB,M, 2:00 PM - 4:20 PM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+14865,MAE 334LLB,Mae Laboratory I,L02,LAB,M, 6:00 PM - 8:20 PM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+14865,MAE 334LLB,Mae Laboratory I,L02,LAB,M, 6:00 PM - 8:20 PM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+14866,MAE 334LLB,Mae Laboratory I,L03,LAB,T, 8:00 AM - 10:20 AM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+14866,MAE 334LLB,Mae Laboratory I,L03,LAB,T, 8:00 AM - 10:20 AM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+14867,MAE 334LLB,Mae Laboratory I,L04,LAB,T, 12:30 PM - 2:50 PM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+14867,MAE 334LLB,Mae Laboratory I,L04,LAB,T, 12:30 PM - 2:50 PM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+14868,MAE 334LLB,Mae Laboratory I,L05,LAB,T, 3:30 PM - 5:50 PM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+14868,MAE 334LLB,Mae Laboratory I,L05,LAB,T, 3:30 PM - 5:50 PM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+14869,MAE 334LLB,Mae Laboratory I,L06,LAB,T, 6:30 PM - 8:50 PM,Furnas 810,North Campus, Estes  * St. Pierre,Open
+14869,MAE 334LLB,Mae Laboratory I,L06,LAB,T, 6:30 PM - 8:50 PM,Furnas 811,North Campus, Estes  * St. Pierre,Open
+14870,MAE 334LLB,Mae Laboratory I,L07,LAB,W, 8:00 AM - 10:20 AM,Furnas 810,North Campus, Estes  * St. Pierre,Open
+14870,MAE 334LLB,Mae Laboratory I,L07,LAB,W, 8:00 AM - 10:20 AM,Furnas 811,North Campus, Estes  * St. Pierre,Open
+14871,MAE 334LLB,Mae Laboratory I,L08,LAB,W, 3:00 PM - 5:20 PM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+14871,MAE 334LLB,Mae Laboratory I,L08,LAB,W, 3:00 PM - 5:20 PM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+14872,MAE 334LLB,Mae Laboratory I,L09,LAB,W, 6:00 PM - 8:20 PM,Furnas 810,North Campus, Estes  * St. Pierre,Open
+14872,MAE 334LLB,Mae Laboratory I,L09,LAB,W, 6:00 PM - 8:20 PM,Furnas 811,North Campus, Estes  * St. Pierre,Open
+14873,MAE 334LLB,Mae Laboratory I,L10,LAB,R, 8:00 AM - 10:20 AM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+14873,MAE 334LLB,Mae Laboratory I,L10,LAB,R, 8:00 AM - 10:20 AM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+14874,MAE 334LLB,Mae Laboratory I,L11,LAB,R, 12:30 PM - 2:50 PM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+14874,MAE 334LLB,Mae Laboratory I,L11,LAB,R, 12:30 PM - 2:50 PM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+16143,MAE 334LLB,Mae Laboratory I,L12,LAB,R, 3:30 PM - 5:50 PM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+16143,MAE 334LLB,Mae Laboratory I,L12,LAB,R, 3:30 PM - 5:50 PM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
+16144,MAE 334LLB,Mae Laboratory I,L13,LAB,R, 6:30 PM - 8:50 PM,Furnas 810,North Campus, Estes  * St. Pierre,Open
+16144,MAE 334LLB,Mae Laboratory I,L13,LAB,R, 6:30 PM - 8:50 PM,Furnas 811,North Campus, Estes  * St. Pierre,Open
+16145,MAE 334LLB,Mae Laboratory I,L14,LAB,F, 8:00 AM - 10:20 AM,Furnas 810,North Campus, Estes  * St. Pierre,Open
+16145,MAE 334LLB,Mae Laboratory I,L14,LAB,F, 8:00 AM - 10:20 AM,Furnas 811,North Campus, Estes  * St. Pierre,Open
+21422,MAE 334LLB,Mae Laboratory I,L15,LAB,F, 10:30 AM - 12:50 PM,Furnas 810,North Campus, Estes  * St. Pierre,Closed
+21422,MAE 334LLB,Mae Laboratory I,L15,LAB,F, 10:30 AM - 12:50 PM,Furnas 811,North Campus, Estes  * St. Pierre,Closed
 13428,MAE 336LEC,Heat Transfer,A,LEC,M W F, 8:00 AM - 8:50 AM,Knox 109,North Campus, Mollendorf,Open
 16631,MAE 336LEC,Heat Transfer,B,LEC,M W F, 10:00 AM - 10:50 AM,Nsc 218,North Campus, Mollendorf,Closed
 <<<>>>,MAE 345LR,Intermediate Dynamics,A,LEC,T R, 12:30 PM - 1:50 PM,Nsc 210,North Campus, Darrall,Closed
@@ -2605,7 +2663,11 @@
 19764,TH 201SEM,Script Analysis,NK,SEM,T R, 12:30 PM - 1:50 PM,Academ 351,North Campus, Kwon,Open w/ Reserves
 14617,TH 203LEC,Visual Imagination,DB,LEC,T R, 9:00 AM - 10:20 AM,Alumni 195,North Campus, Burlingame,Closed
 23689,TH 205LEC,Technical Drafting,EF,LEC,M W, 12:30 PM - 1:50 PM,Alumni 195,North Campus, Frank,Open w/ Reserves
+18028,TH 209LEC,Method Acting 2,GN,LEC,T R, 11:10 AM - 1:00 PM,Academ 102,North Campus, Natale,Open w/ Reserves
+18028,TH 209LEC,Method Acting 2,GN,LEC,T R, 11:10 AM - 1:00 PM,Academ 102A,North Campus, Natale,Open w/ Reserves
 18709,TH 220LEC,Performing America,KH,LEC,M W, 2:00 PM - 3:20 PM,Clemen 119,North Campus, Hoxworth,Open w/ Reserves
+16920,TH 228SEM,Voice Training 2,KG,SEM,M W, 9:00 AM - 10:50 AM,Academ 102,North Campus, Golde,Open w/ Reserves
+16920,TH 228SEM,Voice Training 2,KG,SEM,M W, 9:00 AM - 10:50 AM,Academ 102A,North Campus, Golde,Open w/ Reserves
 20477,TH 240SEM,Introduction To Stage Combat,DR,SEM,M W, 2:00 PM - 3:20 PM,Cfa B83,North Campus, Rosvally,Closed
 18708,TH 302LEC,Theatre History & Lit 2,MC,LEC,T R, 11:00 AM - 12:20 PM,Norton 209,North Campus, Conti,Open w/ Reserves
 22092,TH 303LEC,Scene Design 1,CN,LEC,M W, 11:00 AM - 12:20 PM,Alumni 195,North Campus, Norgren,Open
@@ -2613,6 +2675,10 @@
 18710,TH 390LEC,Design Resources,CN,LEC,T R, 12:30 PM - 1:50 PM,Alumni 195,North Campus, Norgren,Open w/ Reserves
 23699,TH 401SEM,Directing 1,VON,SEM,M W, 9:00 AM - 10:20 AM,Alumni 190,North Campus, Oneill,Closed
 23700,TH 409LEC,Mime/movement For Actors,VON,LEC,M W, 2:00 PM - 3:20 PM,Alumni 190,North Campus, Oneill,Closed
+22139,TH 424SEM,Special Topics-Acting For The Camera,GN,SEM,T R, 9:00 AM - 10:50 AM,Academ 102,North Campus, Natale,Open w/ Reserves
+22139,TH 424SEM,Special Topics-Acting For The Camera,GN,SEM,T R, 9:00 AM - 10:50 AM,Academ 102A,North Campus, Natale,Open w/ Reserves
+22338,TH 427LEC,Voice And Movement,KG,LEC,M W, 12:30 PM - 1:50 PM,Academ 102,North Campus, Golde,Open w/ Reserves
+22338,TH 427LEC,Voice And Movement,KG,LEC,M W, 12:30 PM - 1:50 PM,Academ 102A,North Campus, Golde,Open w/ Reserves
 22250,TH 433LEC,Lighting Design,AH,LEC,M, 2:30 PM - 4:50 PM,Alumni 195,North Campus, Staff,Open
 13978,TH 439SR,Studies In Design,LK,SEM,W, 5:30 PM - 7:50 PM,Alumni 195,North Campus, Koscielniak,Closed
 <<<>>>,TH 439SR,Studies In Design,REC,REC,F, 11:30 AM - 12:50 PM,Alumni 195,North Campus, Koscielniak,Open
