@@ -29,6 +29,7 @@
 #put into database in a seperate file
 import csv 
 import re
+from datetime import datetime
 #GOOD DAYS DONT HAVE "TBA, EMPTY"
 #GOOD TIMES HAVE REGEX "AM/PM TO AM/PM"
 #GOOD CAMPUSES HAVE NORTH/SOUTH OR DOWNTOWN
@@ -84,3 +85,19 @@ with open("ub_classes_db.csv", "w", newline= '') as w:
             ending = old_time_space[4] + " " + old_time_space[5]
             #print(beginning, ending)
             writer.writerow((line[0],line[1],line[2],line[3],line[4],line[5],beginning,ending,line[7],line[8],line[9],line[10]))
+
+    
+with open("ub_classes_query.csv","w", newline='') as w:
+    with open("ub_classes_db.csv") as r:
+        reader = csv.reader(r)
+        writer = csv.writer(w)
+        for line in reader:
+            beginning = line[6]
+            ending = line[7]
+            beginning_object = datetime.strptime(beginning, '%I:%M %p')
+            beginning = datetime.strftime(beginning_object, "%H:%M:%S")
+            ending_object = datetime.strptime(ending, '%I:%M %p')
+            ending = datetime.strftime(ending_object, "%H:%M:%S")
+            #print(beginning,ending)
+            #print(line[11])
+            writer.writerow((line[0],line[1],line[2],line[3],line[4],line[5],beginning,ending,line[8],line[9],line[10],line[11]))
