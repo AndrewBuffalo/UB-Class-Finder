@@ -7,10 +7,10 @@ import sqlite3
 conn = sqlite3.connect("ub_classes.sqlite")
 c = conn.cursor()
 
-c.execute("SELECT * FROM classes WHERE status = 'Open' ")
+c.execute("SELECT * FROM classes WHERE time(ending_time) < '08:00:00' ")
 
-print(len(c.fetchall()))
-
+for i in c.fetchall():
+    print(i)
 conn.commit()
 
 conn.close()
