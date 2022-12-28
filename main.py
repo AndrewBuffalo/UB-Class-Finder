@@ -7,8 +7,8 @@ import sqlite3
 conn = sqlite3.connect("ub_classes.sqlite")
 c = conn.cursor()
 
-c.execute("SELECT * FROM classes WHERE time(ending_time) < '08:00:00' ")
-
+c.execute("SELECT * FROM classes WHERE time(ending_time) > '22:00:00' ")
+#u =0
 for i in c.fetchall():
     print(i)
 conn.commit()
