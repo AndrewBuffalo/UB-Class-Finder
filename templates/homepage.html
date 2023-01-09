@@ -1,22 +1,18 @@
-
-<!-- bootstrap needs to be installed for this to work -->
-<!-- {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
 {#    {% if error %}#}
 {#        <p class=error><strong>error:</strong></p>{{ error }}#}
 {#    {% endif %}#} -->
-<!-- <h1>Login Page</h1> -->
+<h1>UB study space finder</h1>
 <form method="POST">
-    <h3>Login Page</h3>
+    <h3>Give it a try!</h3>
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary">Search!</button>
 </form>
 {% endblock content %}
