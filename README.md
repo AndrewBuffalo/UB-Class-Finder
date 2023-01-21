@@ -2,7 +2,7 @@
  
 ``app.py`` starts off the server </br>
 ``templates`` has the HTML documents that are rendered </br>
-``generating`` has all of the files that were used to get  the server ready
+``generating`` has all of the files that were used to get  the server ready </br>
 ``ub_classes.sqlite`` is the **DB** used for the application
 
 
