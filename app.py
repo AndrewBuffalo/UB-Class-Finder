@@ -1,9 +1,10 @@
 from flask import Flask
-from flask import render_template, request, redirect, make_response 
+from flask import render_template, make_response 
 from datetime import datetime, timedelta
 import sqlite3
 from pytz import timezone
-from converter import converter
+
+import generating.converter as converter
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ def index():
     current_time = datetime.now(tz)
     result = {}
     south_campuslist = []
-    north_campuslist = []
+    north_campuslist = []  
     down_townlist = []
     conn = sqlite3.connect("ub_classes.sqlite")
     c = conn.cursor()
@@ -32,7 +33,7 @@ def index():
         datetime.strftime(current_time_4, "%H:%M:%S"),
         datetime.strftime(current_time, "%H:%M:%S")))
     for i in c.fetchall():
-        if converter(datetime.now().strftime('%A')) in str(i[5]): #MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
+        if converter.converter((datetime.now().strftime('%A')) in str(i[5])): #MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
             south_campuslist.remove(i)
     result['South Campus'] = south_campuslist
     #SOUTH CAMPUS END
@@ -50,7 +51,7 @@ def index():
         datetime.strftime(current_time_4, "%H:%M:%S"),
         datetime.strftime(current_time, "%H:%M:%S")))
     for i in c.fetchall():
-        if converter(datetime.now().strftime('%A')) in str(i[5]): #MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
+        if converter.converter((datetime.now().strftime('%A')) in str(i[5])): #MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
             north_campuslist.remove(i)
     result['North Campus'] = north_campuslist
     #NORTH CAMPUS END 
@@ -68,7 +69,7 @@ def index():
         datetime.strftime(current_time_4, "%H:%M:%S"),
         datetime.strftime(current_time, "%H:%M:%S")))
     for i in c.fetchall():
-        if converter(datetime.now().strftime('%A')) in str(i[5]): #MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
+        if converter.converter((datetime.now().strftime('%A')) in str(i[5])): #MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
             down_townlist.remove(i)
     result['Downtown Campus'] = down_townlist
     #DOWNTOWN END 
