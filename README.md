@@ -1,8 +1,8 @@
 ### This is going to be the README of the project when it is deployed and has be refactored
  
-``app.py`` starts off the server </br>
-``templates`` has the HTML documents that are rendered </br>
-``generating`` has all of the files that were used to get  the server ready </br>
-``ub_classes.sqlite`` is the **DB** used for the application
+``Client`` folder is where all of the frontend is</br>
+``flask-server`` is where all of the backend is</br>
+``generating`` has all of the files that were used to get  the server ready (inside of the flask folder) </br>
+``ub_classes.sqlite`` is the **DB** used for the application (inside of the flask-server folder)
 
 
