@@ -4,12 +4,12 @@ from datetime import datetime, timedelta
 import sqlite3
 from pytz import timezone
 import os
-
+import json
 import generating.converter as converter
 
 app = Flask(__name__)
 
-@app.route("/", methods = ['GET', 'POST'])
+@app.route("/classes", methods = ['POST', 'GET'])
 def index():
     tz = timezone('EST') 
     current_time = datetime.now(tz)
@@ -17,7 +17,8 @@ def index():
     south_campuslist = []
     north_campuslist = []  
     down_townlist = []
-    conn = sqlite3.connect(os.getcwd() + r'\ub_classes.sqlite')
+    #print(os.getcwd() + r'\\ub_classes.sqlite')
+    conn = sqlite3.connect(r'./ub_classes.sqlite')
     c = conn.cursor()
     current_time_4 = current_time - timedelta(hours=4)
     hm = current_time + timedelta(hours = 10)
@@ -75,12 +76,7 @@ def index():
     result['Downtown Campus'] = down_townlist
     #DOWNTOWN END 
     print(len(result['North Campus']) + len(result['South Campus']) + len(result['Downtown Campus']))
-    return render_template('index.html',title = 'Class Finder', result = result, current_time_4 = current_time_4, current_time = current_time)
-
-@app.route("/classes")
-def homepage():
-  return make_response(render_template("homepage.html")) 
-
+    return json.dumps(result)
 
 
 
