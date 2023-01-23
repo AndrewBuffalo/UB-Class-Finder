@@ -91,8 +91,8 @@ def south():
 
 @app.route("/north", methods = ['POST', 'GET'])
 def north():
-    usable = json.loads(index())
-    return usable
+    usable = json.loads(index()) #same here and downtown
+    return usable['North Campus']
 
 @app.route("/downtown", methods = ['POST', 'GET'])
 def downtown():
