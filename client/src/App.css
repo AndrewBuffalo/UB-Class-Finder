@@ -1,10 +1,23 @@
-.container{
+.container {
     display: flex;
     align-content: center;
     justify-content: center;
 }
 
-.image{
+.image {
     height: 320px;
     width: 320px;
 }
+
+.button {
+    border-radius: 15px; /* This will round the corners of the button by 10px */
+}
+
+.button:hover {
+    background-color: rgb(227, 227, 227);
+}
+
+.directions {
+    text-align: center;
+}
+

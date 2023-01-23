@@ -16,14 +16,22 @@ function App() {
       });
   }, []);
 
-  // MAIN REACT APP JSX
+  // good morning andrew :)
+  // honestly the CSS took me 80% of the time and it was so annoying lol
+  // i just put the directions component there for fun (for now)
+  // feature idea: website could be able to forcast available classrooms for a future time, not just based on current time
+  // bookmarked data variable: <>{result}</>
 
   return (
     <div>
-      <Navbar />
+      <Directions />
       <CampusSelection />
     </div>
   );
+}
+
+function Directions() {
+  return <h1 className="directions">Select a Campus</h1>;
 }
 
 function CampusSelection() {
@@ -41,7 +49,7 @@ function CampusBox(props) {
   const picture = props.picture;
   return (
     <div>
-      <button>
+      <button className="button">
         <img className="image" src={picture} alt="specified campus" />
         <h1 className="text">{campus}</h1>
       </button>
@@ -49,17 +57,4 @@ function CampusBox(props) {
   );
 }
 
-function Navbar() {
-  return (
-    <nav className="navbar">
-      <h1>Find a Classroom</h1>
-      <h1>University at Buffalo</h1>
-    </nav>
-  );
-}
-
 export default App;
-
-// button will need an onClick that renders a new page with the corresponding campus information
-// also website should eventually be able to forcast for a future time on the second page, not just on current information
-// data variable: <>{result}</>
