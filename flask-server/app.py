@@ -9,6 +9,8 @@ import generating.converter as converter
 
 app = Flask(__name__)
 
+
+
 @app.route("/classes", methods = ['POST', 'GET'])
 def index():
     tz = timezone('EST') 
@@ -77,7 +79,25 @@ def index():
     #DOWNTOWN END 
     print(len(result['North Campus']) + len(result['South Campus']) + len(result['Downtown Campus']))
     return json.dumps(result)
+#usable = usable
+#Whatever you return is what I am going to receive in my frontend also prob return it using
+#json.dumps(the final thing uve been working with) not entirely sure if it matters 
+@app.route("/south", methods = ['POST', 'GET'])
+def south():
+    usable = json.loads(index())
+    print(usable) #prints so you could see what datastructure you're looking at 
+    #Do all of the processing here please :)
+    return usable['South Campus'] #by the time you return it should be a list of all the classrooms in south
 
+@app.route("/north", methods = ['POST', 'GET'])
+def north():
+    usable = json.loads(index())
+    return usable
+
+@app.route("/downtown", methods = ['POST', 'GET'])
+def downtown():
+    usable = json.loads(index())
+    return usable
 
 
 if __name__ == '__main__':
