@@ -98,21 +98,21 @@ def getClassList(usable):
 def south():
     usable = json.loads(index())
     usable = usable['South Campus']
-    return getClassList(usable)
+    return json.dumps(getClassList(usable))
 
 
 @app.route("/north", methods=['POST', 'GET'])
 def north():
     usable = json.loads(index())
     usable = usable['North Campus']
-    return getClassList(usable)
+    return json.dumps(getClassList(usable))
 
 
 @app.route("/downtown", methods=['POST', 'GET'])
 def downtown():
     usable = json.loads(index())
     usable = usable['Downtown Campus']
-    return getClassList(usable)
+    return json.dumps(getClassList(usable))
 
 
 if __name__ == '__main__':
