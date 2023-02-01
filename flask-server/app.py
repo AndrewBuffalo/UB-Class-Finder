@@ -10,7 +10,7 @@ import generating.converter as converter
 app = Flask(__name__)
 
 
-@app.route("/classes", methods=['POST', 'GET'])
+
 def index():
     tz = timezone('EST')
     current_time = datetime.now(tz)
@@ -79,8 +79,8 @@ def index():
             down_townlist.remove(i)
     result['Downtown Campus'] = down_townlist
     # DOWNTOWN END
-    print(len(result['North Campus']) +
-          len(result['South Campus']) + len(result['Downtown Campus']))
+    #print(len(result['North Campus']) +
+        #  len(result['South Campus']) + len(result['Downtown Campus']))
     return json.dumps(result)
 # usable = usable
 # Whatever you return is what I am going to receive in my frontend also prob return it using
