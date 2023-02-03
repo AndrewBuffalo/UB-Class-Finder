@@ -1,13 +1,17 @@
 import React from "react";
-import { Navbar, Container } from "react-bootstrap";
+
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
 
 function PageHeader() {
   return (
-    <Navbar expand="lg" className="navbar-custom">
-      <Container className="d-flex h-100 align-items-center">
-        <Navbar.Brand className="navbar-brand">Find a Classroom</Navbar.Brand>
-      </Container>
-    </Navbar>
+    <>
+      <Navbar bg="light">
+        <Container>
+          <Navbar.Brand classname="NavbarBrand">Find a Classroom</Navbar.Brand>
+        </Container>
+      </Navbar>
+    </>
   );
 }
 

@@ -4,9 +4,12 @@ import NorthCampus from "../photos/NorthCampus.jpg";
 import SouthCampus from "../photos/SouthCampus.jpg";
 import DowntownCampus from "../photos/DowntownCampus.jpg";
 
+import Button from "react-bootstrap/Button";
+
 function CampusSelection() {
   return (
     <div>
+      <br></br>
       <h1 className="directions">Select a Campus</h1>;
       <div className="container">
         <CampusBox campus="North Campus" picture={NorthCampus}>
@@ -19,6 +22,7 @@ function CampusSelection() {
           <Classes campus="downtown" />
         </CampusBox>
       </div>
+      <br></br>
     </div>
   );
 }
@@ -29,10 +33,14 @@ function CampusBox(props) {
   const [displayClasses, setDisClasses] = useState(false);
   return (
     <div>
-      <button className="button" onClick={() => setDisClasses(!displayClasses)}>
-        <img className="image" src={picture} alt="specified campus" />
-        <h1 className="text">{campus}</h1>
-      </button>
+      <Button
+        className="rounded"
+        variant="outline-dark"
+        onClick={() => setDisClasses(!displayClasses)}
+      >
+        <img className="image rounded" src={picture} alt="specified campus" />
+        <h2 className="text">{campus}</h2>
+      </Button>
       {displayClasses && props.children}
     </div>
   );
