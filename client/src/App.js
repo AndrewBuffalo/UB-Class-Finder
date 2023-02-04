@@ -1,16 +1,15 @@
-import "./App.css";
 import React from "react";
 
-import PageHeader from "./components/PageHeader.js";
-import Explainer from "./components/Explainer.js";
+import Header from "./components/Header.js";
+import Footer from "./components/Footer.js";
 import { CampusSelection } from "./components/campusSelection.js";
 
 function App() {
   return (
     <div>
-      <PageHeader />
+      <Header />
       <CampusSelection />
-      <Explainer />
+      <Footer />
     </div>
   );
 }

@@ -4,14 +4,12 @@ import NorthCampus from "../photos/NorthCampus.jpg";
 import SouthCampus from "../photos/SouthCampus.jpg";
 import DowntownCampus from "../photos/DowntownCampus.jpg";
 
-import Button from "react-bootstrap/Button";
-
 function CampusSelection() {
   return (
     <div>
       <br></br>
-      <h1 className="directions">Select a Campus</h1>;
-      <div className="container">
+      <p className="font-bold text-3xl text-center">Select a Campus</p>;
+      <div className="flex my-8">
         <CampusBox campus="North Campus" picture={NorthCampus}>
           <Classes campus="north" />
         </CampusBox>
@@ -33,14 +31,17 @@ function CampusBox(props) {
   const [displayClasses, setDisClasses] = useState(false);
   return (
     <div>
-      <Button
-        className="rounded"
-        variant="outline-dark"
+      <button
+        className="hover:bg-slate-400"
         onClick={() => setDisClasses(!displayClasses)}
       >
-        <img className="image rounded" src={picture} alt="specified campus" />
-        <h2 className="text">{campus}</h2>
-      </Button>
+        <img
+          className="h-64 w-64 object-cover rounded-xl mx-8"
+          src={picture}
+          alt="specified campus"
+        />
+        <h2>{campus}</h2>
+      </button>
       {displayClasses && props.children}
     </div>
   );
@@ -49,14 +50,12 @@ function CampusBox(props) {
 function Classes(props) {
   const [classes, setClasses] = useState([]);
   useEffect(
-    () =>
-      //`/${props.campus}`
-      async () => {
-        let response = await fetch(`${props.campus}`);
-        response = await response.json();
-        console.log(props.campus);
-        setClasses(response);
-      },
+    () => async () => {
+      let response = await fetch(`${props.campus}`);
+      response = await response.json();
+      console.log(props.campus);
+      setClasses(response);
+    },
     []
   );
   return (

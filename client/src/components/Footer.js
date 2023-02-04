@@ -1,11 +1,9 @@
 import React from "react";
-import Alert from "react-bootstrap/Alert";
 
-function Explainer() {
+function Footer() {
   return (
-    <div className="container">
-      <Alert className="rounded" variant="secondary">
-        <Alert.Heading>So, how does this work?</Alert.Heading>
+    <div>
+      <h1>
         <p>
           Find a Classroom is the perfect solution for University at Buffalo
           students who are looking for an available classroom to study in. With
@@ -18,10 +16,10 @@ function Explainer() {
           spot!
         </p>
         <hr />
-        <p className="mb-0">Version 1.0: February 3, 2023</p>
-      </Alert>
+        <p>Version 1.0: February 3, 2023</p>
+      </h1>
     </div>
   );
 }
 
-export default Explainer;
+export default Footer;
