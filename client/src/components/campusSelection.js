@@ -6,7 +6,7 @@ import DowntownCampus from "../photos/DowntownCampus.jpg";
 
 function CampusSelection() {
   return (
-    <div className="flex justify-center gap-8 py-6">
+    <div className="flex justify-center gap-10 py-6">
       <CampusBox picture={NorthCampus}>
         <Classes campus="north" />
       </CampusBox>
@@ -26,7 +26,7 @@ function CampusBox(props) {
   return (
     <div className="text-center">
       <button
-        className="h-64 w-64"
+        className="h-80 w-80"
         onClick={() => setDisClasses(!displayClasses)}
       >
         <img className="rounded-xl" src={picture} alt="specified campus" />
