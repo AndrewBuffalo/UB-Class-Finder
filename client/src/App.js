@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
-import Header from "./components/Header.js";
+import Navbar from "./components/Navbar.js";
+import Explainer from "./components/Explainer.js";
 import Footer from "./components/Footer.js";
-import { CampusSelection } from "./components/campusSelection.js";
+import { CampusSelection } from "./components/CampusSelection.js";
 
 function App() {
   return (
     <div>
-      <Header />
+      <Navbar />
+      <Explainer />
       <CampusSelection />
       <Footer />
     </div>
