@@ -48,10 +48,10 @@ function Classes(props) {
     []
   );
   return (
-    <div>
+    <div className="border-2 border-black rounded-xl py-4 text-lg">
       <ul>
         {classes.map((classe) => (
-          <li>{classe}</li>
+          <li className="font-medium">{classe}</li>
         ))}
       </ul>
     </div>
