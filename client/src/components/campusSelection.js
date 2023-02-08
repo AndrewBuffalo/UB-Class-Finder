@@ -6,7 +6,7 @@ import DowntownCampus from "../photos/DowntownCampus.jpg";
 
 function CampusSelection() {
   return (
-    <div className="lg:flex justify-center gap-8 py-5">
+    <div className="flex justify-center gap-8 py-6">
       <CampusBox picture={NorthCampus}>
         <Classes campus="north" />
       </CampusBox>
@@ -24,13 +24,12 @@ function CampusBox(props) {
   const picture = props.picture;
   const [displayClasses, setDisClasses] = useState(false);
   return (
-    <div>
-      <button className="hover:" onClick={() => setDisClasses(!displayClasses)}>
-        <img
-          className="h-64 w-64 object-cover rounded-xl mx-8"
-          src={picture}
-          alt="specified campus"
-        />
+    <div className="text-center">
+      <button
+        className="h-64 w-64"
+        onClick={() => setDisClasses(!displayClasses)}
+      >
+        <img className="rounded-xl" src={picture} alt="specified campus" />
       </button>
       {displayClasses && props.children}
     </div>

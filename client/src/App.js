@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Explainer />
       <CampusSelection />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
