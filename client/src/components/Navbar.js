@@ -1,6 +1,6 @@
 import React from "react";
 import { BsFillMoonStarsFill } from "react-icons/bs";
-import UB_logo from "../photos/UB_logo.png";
+//import UB_logo from "../photos/UB_Logo.png";
 
 function Navbar() {
   return (
