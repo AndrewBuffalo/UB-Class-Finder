@@ -1,12 +1,15 @@
 import React from "react";
 import { BsFillMoonStarsFill } from "react-icons/bs";
-//import UB_logo from "../photos/UB_Logo.png";
 
 function Navbar() {
   return (
     <div className="bg-white px-10">
       <nav className="py-6 flex justify-between rounded-xl">
-        <h1 className="text-2xl font-bold px-6">Find a Classroom</h1>
+        <a href="/">
+          <h1 className="text-2xl font-bold px-6 hover:text-gray-600">
+            Find a Classroom
+          </h1>
+        </a>
 
         <ul className="flex items-center pr-6">
           <li>
@@ -16,8 +19,8 @@ function Navbar() {
           <li>
             {" "}
             <a
-              href="#"
-              className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-4 py-2 rounded-md ml-8"
+              href="/about"
+              className="bg-blue-600 hover:bg-gradient-to-r from-blue-600 to-blue-400 text-white px-4 py-2 rounded-lg ml-8"
             >
               About
             </a>
