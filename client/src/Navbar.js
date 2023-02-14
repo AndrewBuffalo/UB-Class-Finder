@@ -12,9 +12,9 @@ function Navbar() {
         </a>
 
         <ul className="flex items-center pr-6">
-          <li>
+          {/* <li>
             <BsFillMoonStarsFill className="cursor-pointer text-2xl" />
-          </li>
+          </li> */}
 
           <li>
             {" "}

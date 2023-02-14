@@ -36,7 +36,7 @@ function CampusBox(props) {
   const picture = props.picture;
   const [displayClasses, setDisClasses] = useState(false);
   return (
-    <div className="text-center">
+    <div>
       <button
         className="h-80 w-80"
         onClick={() => setDisClasses(!displayClasses)}
