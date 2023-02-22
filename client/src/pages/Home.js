@@ -52,7 +52,7 @@ function Classes(props) {
   const [classes, setClasses] = useState([]);
   useEffect(
     () => async () => {
-      let response = await fetch(`${props.campus}`);
+      let response = await fetch(`/api/${props.campus}`);
       response = await response.json();
       console.log(props.campus);
       setClasses(response);

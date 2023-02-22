@@ -109,21 +109,21 @@ def index():
 #     return final
 
 
-@app.route("/south", methods=['POST', 'GET'])
+@app.route("/api/south", methods=['POST', 'GET'])
 def south():
     usable = json.loads(index())
     usable = usable['South Campus']
     return usable
 
 
-@app.route("/north", methods=['POST', 'GET'])
+@app.route("/api/north", methods=['POST', 'GET'])
 def north():
     usable = json.loads(index())
     usable = usable['North Campus']
     return usable
 
 
-@app.route("/downtown", methods=['POST', 'GET'])
+@app.route("/api/downtown", methods=['POST', 'GET'])
 def downtown():
     usable = json.loads(index())
     usable = usable['Downtown Campus']
