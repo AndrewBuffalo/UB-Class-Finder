@@ -38,7 +38,7 @@ function CampusBox(props) {
   return (
     <div>
       <button
-        className="h-80 w-80"
+        className="lg:h-80 lg:w-80"
         onClick={() => setDisClasses(!displayClasses)}
       >
         <img className="rounded-xl" src={picture} alt="specified campus" />
