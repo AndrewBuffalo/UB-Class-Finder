@@ -19,21 +19,26 @@ driver.get("https://www.buffalo.edu/class-schedule?semester=spring&division=2")
 try:
     driver.implicitly_wait(5)   
     i = 6
-    with open("already_done.csv","a",newline= '') as f:
+    with open("classes_1.csv","a",newline= '') as f:
             #fieldnames = ["Class","Course","Title","Section","Type","Days","Time","Room","Location","Instructor (*) Additional Instructor", "Status"]
             #writer = csv.DictWriter(f, fieldnames= fieldnames)
             #writer.writeheader()
             writer = csv.writer(f)
             #print("test")
-            while( i!= 148):
+            while( i!= 149):
+                #print("hey")
                 table = driver.find_element_by_xpath(f'/html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[{i}]')
+                #print("hey")
                 link_click = table.text.split(" ")
                 del link_click[-1]
+                #print(33)
                 link_click[0:len(link_click)] = [' '.join(link_click[0:len(link_click)])]
                 link_click = link_click[0].split(" ")
                 link_click[0:len(link_click)] = [' '.join(link_click[3:-2])]
+                #print(37)
                 link = driver.find_element_by_link_text(link_click[0]) #getting the string to click on
                 link.click()
+                #print(38)
                 #do stuff 
                 #get all of the data 
                 class_table = driver.find_elements_by_xpath("/html[1]/body[1]/table[4]/tbody[1]/tr")
@@ -51,8 +56,9 @@ try:
                 driver.back()
                 i+=1
     driver.quit()
-except:
+except Exception as e :
     print("Error")
+    print(e)
     driver.quit()
 
 

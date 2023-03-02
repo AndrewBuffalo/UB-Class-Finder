@@ -6,14 +6,18 @@ from pytz import timezone
 import os
 import json
 import generating.converter as converter
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 
 def index():
     tz = timezone('EST')
     current_time = datetime.now(tz)
+    #datatime_element = datetime(2023,2,25,20,00 )
+    #print(datatime_element)
     result = {}
     south_campuslist = []
     north_campuslist = []
@@ -39,13 +43,27 @@ def index():
                                          AND ending_time > (?)
     ''', (datetime.strftime(current_time, "%H:%M:%S"),
           datetime.strftime(current_time, "%H:%M:%S")))
+    #print(len(south_campuslist))
+    s_len_before = len(south_campuslist)
     for i in c.fetchall(): #ADDED
         # MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
-        if converter.converter((datetime.now().strftime('%A')) in str(i[5])):
-            if i in south_campuslist:
-             south_campuslist.remove(i)
+        # print("44 : " + str(converter.converter((datetime.now().strftime('%A')))))
+        # print("45 : " + str(i[5]))
+        # print(str(converter.converter((datetime.now().strftime('%A'))) in str(i[5])))
+        # print(str(i[5]) in converter.converter((datetime.now().strftime('%A'))))
+        #print((datatime_element.strftime('%A')))
+        if str(converter.converter((current_time.strftime('%A'))) in str(i[5])):
+        
+            #print("45")
+            #print(str(i) + " " + str(type(i)))
+            if i[8] in south_campuslist:
+                
+                south_campuslist.remove(i[8])
+                #print(i + "47")
             else:
-                pass
+                    pass
+    s_len_after = len(south_campuslist)
+    print("South : " +  str(s_len_after) + " / " + str(s_len_before))
     result['South Campus'] = south_campuslist
     # SOUTH CAMPUS END
 
@@ -65,11 +83,14 @@ def index():
                                          AND ending_time > (?)
     ''', (datetime.strftime(current_time, "%H:%M:%S"),
           datetime.strftime(current_time, "%H:%M:%S")))
+    n_len_before = len(north_campuslist)
     for i in c.fetchall():
         # MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
-        if converter.converter((datetime.now().strftime('%A')) in str(i[5])):
-            if i in north_campuslist:
-             north_campuslist.remove(i)
+        if str(converter.converter((current_time.strftime('%A'))) in str(i[5])):
+            if i[8] in north_campuslist:
+             north_campuslist.remove(i[8])
+    n_len_after = len(north_campuslist)
+    print("North : " +  str(n_len_after) + " / " + str(n_len_before))
     result['North Campus'] = north_campuslist
     # NORTH CAMPUS END
 
@@ -89,9 +110,9 @@ def index():
           datetime.strftime(current_time, "%H:%M:%S")))
     for i in c.fetchall():
         # MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
-        if converter.converter((datetime.now().strftime('%A')) in str(i[5])):
-            if i in down_townlist:
-              down_townlist.remove(i)
+        if str(converter.converter((datetime.now(tz).strftime('%A'))) in str(i[5])):
+            if i[8] in down_townlist:
+              down_townlist.remove(i[8])
     result['Downtown Campus'] = down_townlist
     # DOWNTOWN END
     #print(len(result['North Campus']) +

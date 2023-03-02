@@ -17,12 +17,12 @@ driver.get("https://www.buffalo.edu/class-schedule?semester=spring")
 try:
     driver.implicitly_wait(5)   
     i = 6
-    with open("already_done.csv","a",newline= '') as f:
+    with open("classes_1.csv","a",newline= '') as f:
             fieldnames = ["Class","Course","Title","Section","Type","Days","Time","Room","Location","Instructor (*) Additional Instructor", "Status"]
             writer = csv.DictWriter(f, fieldnames= fieldnames)
             writer.writeheader()
             #print("test")
-            while( i!= 130):
+            while( i!= 131):
                 table = driver.find_element_by_xpath(f'/html[1]/body[1]/table[4]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[{i}]')
                 link_click = table.text.split(" ")
                 del link_click[-1]

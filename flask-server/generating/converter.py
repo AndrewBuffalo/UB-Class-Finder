@@ -10,10 +10,12 @@ def converter(monday_date):
         return "W"
     if monday_date == "Thursday":
         return "R"
-    if monday_date == "Friday":
+    if monday_date == "Friaday":
         return "F"
     if monday_date == "Saturday":
         return "S"
+    if monday_date == "Sunday":
+        return "Su"
 
 def prints(string):
     print(string)

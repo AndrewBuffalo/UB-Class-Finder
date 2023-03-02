@@ -51,11 +51,19 @@ function CampusBox(props) {
 function Classes(props) {
   const [classes, setClasses] = useState([]);
   useEffect(
-    () => async () => {
-      let response = await fetch(`/api/${props.campus}`);
-      response = await response.json();
-      console.log(props.campus);
-      setClasses(response);
+    () => {
+      async function fetchData() {
+        //console.log("hey")
+        const production_link = `/api/${props.campus}`
+        const dev_link = `http://127.0.0.1:5000/api/${props.campus}`
+        console.log(process.env.NODE_ENV)
+        const link = process.env.NODE_ENV === "production" ? production_link : dev_link;
+        let response = await fetch(link);
+        response = await response.json();
+        setClasses(response.sort((a, b) => a.localeCompare(b)));
+      }
+
+      fetchData();
     },
     []
   );

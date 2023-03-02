@@ -39,7 +39,7 @@ from datetime import datetime
 
 rooms = []
 with open("ub_classes.csv","w",newline= '') as f:
-    with open("ub_classes_flawed.csv", "r") as p:
+    with open("classes_1.csv", "r") as p:
         reader = csv.reader(p)
         writer = csv.writer(f)
         possible_campus = ["North Campus", "South Campus", "Downtown Campus"]
