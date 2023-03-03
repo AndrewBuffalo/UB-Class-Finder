@@ -15,6 +15,7 @@ CORS(app)
 
 def index():
     tz = timezone('EST')
+    #print("hey")
     current_time = datetime.now(tz)
     #datatime_element = datetime(2023,2,25,20,00 )
     #print(datatime_element)
@@ -30,6 +31,7 @@ def index():
 
 
     # SOUTH CAMPUS START
+    #print("hey")
     c.execute('''SELECT * FROM classes WHERE location = 'South Campus' ''')
     for i in c.fetchall():
         south_campuslist.append(i[8])
@@ -52,6 +54,8 @@ def index():
         # print(str(converter.converter((datetime.now().strftime('%A'))) in str(i[5])))
         # print(str(i[5]) in converter.converter((datetime.now().strftime('%A'))))
         #print((datatime_element.strftime('%A')))
+        #print("heey")
+        #print((current_time.strftime('%A')))
         if str(converter.converter((current_time.strftime('%A'))) in str(i[5])):
         
             #print("45")
@@ -86,6 +90,7 @@ def index():
     n_len_before = len(north_campuslist)
     for i in c.fetchall():
         # MAKE SURE THAT IT WAS ON THE SAME DAY BEFORE DELETE AND THAT THE END > CURRENT TIME:
+        print(str(converter.converter((current_time.strftime('%A')))))
         if str(converter.converter((current_time.strftime('%A'))) in str(i[5])):
             if i[8] in north_campuslist:
              north_campuslist.remove(i[8])
