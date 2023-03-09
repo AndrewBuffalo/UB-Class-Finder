@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Favorites
+        link(rel="stylesheet", href="/static/style.css")
+    body 
+        a(href="/") Go back to search 
+        table(cellspacing="0")
+            tr 
+                th +
+                th Course Code
+                th Course Name 
+                th Section
+                th Course Days 
+                th Course Room
+                th Time
+                th Status
+            each match in favorites
+                tr
+                    td.btn -
+                    td(hidden)= match.Class
+                    td= match.Course
+                    td
+                        abbr(title=match["Instructor (*) additional instructors"])= match.Title
+                    td= match.Section
+                    td= match.Days 
+                    td= match.Room
+                    td= match.Time
+                    td.collapse(class=match.Status.replace(" w/ ", "_").toLowerCase())= match.Status
+        script(src="/static/script.js") 

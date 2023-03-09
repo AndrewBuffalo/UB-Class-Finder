@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="author", content="Jack Dunfey")
+        title Results
+        link(rel="stylesheet", href="/static/style.css")
+    body 
+        a(href="/") Go back to search
+        unless matches.length == 0
+            table(cellspacing="0")
+                tr 
+                    th +
+                    th Type
+                    th Course Code
+                    th Course Name 
+                    th Instructor(s)
+                    th Section
+                    th Course Days 
+                    th Course Room
+                    th Time
+                    th Status
+                each match in matches
+                    tr
+                        td.btn= match.isFavorite ? "-" : "+"
+                        td(hidden)= match.Class
+                        td= match.Type
+                        td= match.Course
+                        td= match.Title
+                        td= match.Instructors
+                        td= match.Section
+                        td= match.Days 
+                        td= match.Room
+                        td= match.Time
+                        td.collapse(class=match.Status.replace(" w/ ", "_").toLowerCase())= match.Status
+        else 
+            p No classes
+        script(src="/static/script.js") 

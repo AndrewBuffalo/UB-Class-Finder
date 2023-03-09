@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Class is That?</title>
+</head>
+<body>
+    <a href="/favorites">Go to favorites</a>
+    <form action="/check">
+        <p>Day of the Week: <select name="day1" id="1">
+            <option value="" default></option>
+            <option value="M">Monday</option>
+            <option value="T">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="R">Thursday</option>
+            <option value="F">Friday</option>
+            <option value="S">Saturday</option>
+        </select><select name="day2" id="2" hidden> 
+            <option value="" default>Optional</option>
+            <option value="M">Monday</option>
+            <option value="T">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="R">Thursday</option>
+            <option value="F">Friday</option>
+            <option value="S">Saturday</option>
+        </select><select name="day3" id="3" hidden>
+            <option value="" default>Optional</option>
+            <option value="M">Monday</option>
+            <option value="T">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="R">Thursday</option>
+            <option value="F">Friday</option>
+            <option value="S">Saturday</option>
+        </select><select name="day4" id="4" hidden>
+            <option value="" default>Optional</option>
+            <option value="M">Monday</option>
+            <option value="T">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="R">Thursday</option>
+            <option value="F">Friday</option>
+            <option value="S">Saturday</option>
+        </select><select name="day5" id="5" hidden>
+            <option value="" default>Optional</option>
+            <option value="M">Monday</option>
+            <option value="T">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="R">Thursday</option>
+            <option value="F">Friday</option>
+            <option value="S">Saturday</option>
+        </select><select name="day6" id="6" hidden>
+            <option value="" default>Optional</option>
+            <option value="M">Monday</option>
+            <option value="T">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="R">Thursday</option>
+            <option value="F">Friday</option>
+            <option value="S">Saturday</option>
+        </select></p>
+        <p>Location: <input type="text" name="room"></p>
+        <p>Time: <input type="text" name="time" id="time"></p>
+        <input type="submit" value="Submit!">
+        <script>
+            let ts = new Date().toLocaleTimeString();
+            document.getElementById("time").value = ts.slice(0,ts.lastIndexOf(":")) + ts.slice(ts.lastIndexOf(":")+3);
+        </script>
+    </form>
+    <script>
+        function showLeastAvailable(){
+            for(let i = 1; i <= 5; i++)
+                if(document.getElementById(i).hasAttribute("hidden"))
+                    return document.getElementById(i).removeAttribute("hidden");
+            console.log("No more available");
+        }
+        const selects = [...document.querySelectorAll("select")];
+        selects.forEach(el=>{el.addEventListener("change", function(e){
+            if(e.target.value != "")
+                return showLeastAvailable(),1;
+            e.target.setAttribute("hidden", "true");
+        })});
+    </script>
+</body>
+</html>
