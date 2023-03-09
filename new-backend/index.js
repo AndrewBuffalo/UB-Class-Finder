@@ -1,3 +1,4 @@
+require("dotenv/config");
 Array.prototype.includesObject = function(obj){
     for(let i = 0; i < this.length; i++){
         if(typeof this[i] !== "object")
@@ -15,9 +16,8 @@ Array.prototype.indexOfObject = function(obj){
 }
 
 const sql = require("sqlite3");
-
-const fs = require("fs");
-const courses = [];
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const {withinTimeRange, timeToNumber} = require("./time.js");
 const areSame = require("./areSame.js");
@@ -27,14 +27,19 @@ const app = express();
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+app.use(require("cookie-parser")());
+const verifyToken = require("./verifyToken.js");
 
 app.use("/static", express.static(`${__dirname}/public`))
 
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-app.get("/", (req,res)=>{
-    res.render("form");
+app.get("/", verifyToken, (req,res)=>{
+    res.render("form", {
+        jwt: req.JWTBody,
+        anon: req.anonymous
+    });
 });
 
 function getIdentifierFromCourseID(id){
@@ -49,13 +54,13 @@ function sendError(req, res, error_code){
     res.render("error", {error_code});
 }
 
-app.get("/favorites", (req,res)=>{
+app.get("/favorites", verifyToken, (req,res)=>{
     sendError(req, res, 401);
 });
-app.put("/add", (req,res)=>{
+app.put("/add", verifyToken, (req,res)=>{
     sendError(req, res, 401);
 });
-app.delete("/remove", (req,res)=>{
+app.delete("/remove", verifyToken, (req,res)=>{
     sendError(req, res, 401);
 });
 
@@ -106,6 +111,7 @@ app.get("/getClass", (req,res)=>{
 });
 
 app.use("/api", require("./api.js"));
+app.use("/", require("./login.js"));
 
 app.all("*", (req,res)=>{
     sendError(req, res, 404);

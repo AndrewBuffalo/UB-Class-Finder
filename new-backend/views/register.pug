@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    head
+        include includes/head
+        +stylesheet("/static/login.css")
+        title Login
+    body 
+        .login-page 
+            .form 
+                form.register-form(action="/register")
+                    input#name(type="text" name="username" placeholder="Username")
+                    input(type="email" name="email" placeholder="Email address")
+                    input(type="password" name="password" placeholder="password")
+                    button Create Account
+                    p.message Already registered? 
+                        a(href="/login") Sign In
+                </form>

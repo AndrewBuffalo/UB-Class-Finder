@@ -1,17 +1,18 @@
 doctype html
 html(lang="en")
     head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        include includes/head
         script(src="/static/bootstrap/js/jquery.min.js")
         script(src="/static/bootstrap/js/bootstrap.min.js") 
-        link(rel="stylesheet", href="/static/bootstrap/css/bootstrap.min.css")
-        link(rel="stylesheet", href="/static/form.css")
+        +stylesheet("/static/bootstrap/css/bootstrap.min.css")
+        +stylesheet("/static/form.css")
         title Search for a Class
     body 
-        .container-fluid.mt-4
-            a(href="/favorites") Go to favorites
+        .container-fluid.pt-4
+            unless anon
+                a(href="/favorites") Go to favorites
+            else
+                a(href="/login") Sign in to save classes
             .row
                 .col-md-5
                     form(action="/check") 
@@ -26,10 +27,11 @@ html(lang="en")
                                     option(value="R") Thursday
                                     option(value="F") Friday
                                     option(value="S") Saturday
+                                br(name="br"+day_num hidden=(day_num>1))
                             p Day of the Week: 
-                                -var i = 1;
-                                while (i <= 6)
-                                    +day_selector(i++)
+                            -var i = 1;
+                            while (i <= 6)
+                                +day_selector(i++)
                         .form-group.form-inline
                             label(for="room") Room:&nbsp;
                             input.form-control#room(type="text", name="room")

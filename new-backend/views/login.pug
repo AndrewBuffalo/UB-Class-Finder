@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+    head
+        include includes/head
+        +stylesheet("/static/login.css")
+        title Login
+    body 
+        .login-page 
+            form.form(action="/login")
+                input#username(type="text", name="username")
+                input#password(type="password", name="password", placeholder="password")
+                button Login 
+                p.message Not registered? 
+                    a(href="/register") Create an account
+        </div>
