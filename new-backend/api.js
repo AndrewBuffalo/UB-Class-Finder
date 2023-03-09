@@ -1,5 +1,4 @@
 const { withinTimeRange, timeToNumber } = require("./time.js")
-const time_format_options = {hour: "numeric", minute: "numeric"};
 
 const sql = require("sqlite3").verbose()
 function getOpenRoomsByCampus(campus="North"){

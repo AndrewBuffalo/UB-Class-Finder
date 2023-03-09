@@ -1,0 +1,48 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        //- link(rel="stylesheet", href="/static/form.css")
+        title Search for a Class
+    body 
+        <a href="/favorites">Go to favorites</a>
+        .container 
+            fieldset
+                legend Search by Time
+                mixin day_selector(day_num)
+                    select(name="day"+day_num, id=day_num, hidden=(day_num>1))
+                        option(value="" default)
+                        option(value="M") Monday 
+                        option(value="T") Tuesday
+                        option(value="W") Wednesday
+                        option(value="R") Thursday
+                        option(value="F") Friday
+                        option(value="S") Saturday
+                form(action="/check")
+                    p Day of the Week: 
+                        -var i = 1;
+                        while (i <= 6)
+                            +day_selector(i++)
+                    p Room: 
+                        input(type="text" name="room")
+                    p Time: 
+                        input(type="text" name="time" id="time")
+                    p 
+                        label(for="lectures_only") Lectures Only:
+                            input(type="checkbox" name="lectures_only" id="lectures_only" checked)
+                    input(type="submit" value="Search")
+            span OR
+            fieldset 
+                legend Search by Class 
+                form(action="/getClass")
+                    p Course Code:
+                        input(type="text", name="code")
+                    p Course Name: 
+                        input(type="text" name="name")
+                    p 
+                        label(for="lectures_only") Lectures Only:
+                            input(type="checkbox" name="lectures_only" id="lectures_only" checked)
+                    input(type="submit" value="Search")
+        script(src="/static/scripts/form.js") 

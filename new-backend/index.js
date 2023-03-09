@@ -34,47 +34,29 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 app.get("/", (req,res)=>{
-    res.sendFile(`${__dirname}/views/form.html`);
+    res.render("form");
 });
+
+function getIdentifierFromCourseID(id){
+    if(!isNaN(id))
+        return {Class: id};
+    let [a,b] = id.split("||");
+    return {Course: a, Section: b};
+}
+
+// Add user db for favoriting
+function sendError(req, res, error_code){
+    res.render("error", {error_code});
+}
 
 app.get("/favorites", (req,res)=>{
-    res.render("favorites", {favorites});
+    sendError(req, res, 401);
 });
-
 app.put("/add", (req,res)=>{
-    res.end();
-    // Add to favorites in database
-
-    // let course = getCourseFromID(req.query.class_id);
-    // console.log(course);
-    // if(!course){
-    //     res.status(404).send("Course not found");
-    // } else if(favorites.includesObject(course)){
-    //     res.status(200).send("Course already included");
-    // } else {
-    //     course.isFavorite = true;
-    //     favorites.push(course);
-    //     fs.writeFileSync("courses.json", JSON.stringify(courses));
-    //     fs.writeFileSync("favorites.json", JSON.stringify(favorites));
-    //     res.sendStatus(200);
-    // }
+    sendError(req, res, 401);
 });
-
 app.delete("/remove", (req,res)=>{
-    // Remove from favorites
-
-    // let course = getCourseFromID(req.query.class_id);
-    // console.log(course);
-    // if(!favorites.includesObject(course)){
-    //     res.status(404).send("Course not in favorites");
-    // } else {
-    //     // HACK: Probably shouldn't rewrite whole file everytime lol
-    //     course.isFavorite = false;
-    //     favorites.splice(favorites.indexOfObject(course), 1);
-    //     fs.writeFileSync("courses.json", JSON.stringify(courses));
-    //     fs.writeFileSync("favorites.json", JSON.stringify(favorites));
-    //     res.sendStatus(200);
-    // }
+    sendError(req, res, 401);
 });
 
 app.get("/check", (req,res)=>{
@@ -103,19 +85,31 @@ app.get("/check", (req,res)=>{
 });
 
 app.get("/getClass", (req,res)=>{
-    // let name = req.query.name,
-    //     code = req.query.code,
-    //     lectures_only = req.query.lectures_only;
-    // res.render("results", {
-    //     matches: courses.filter(course=>{
-    //         if(lectures_only && course.Type != "LEC")
-    //             return false;
-    //         return code ? course.Course.includes(code) : course.Title.includes(name) || name.includes(course.Title);
-    //     })
-    // });
+    const db = new sql.Database('./ub_classes.sqlite');
+    db.serialize(() => {
+        db.all(`SELECT * FROM classes`, (err, courses) => {
+            if(err)
+                throw err;
+            let name = req.query.name.toLowerCase(),
+                code = req.query.code.toUpperCase(),
+                lectures_only = req.query.lectures_only;
+            res.render("results", {
+                matches: courses.filter(course=>{
+                    if(lectures_only && course.Type != "LEC")
+                        return false;
+                    return course.Course.includes(code) && (course.Title.toLowerCase().includes(name) || name.includes(course.Title.toLowerCase()));
+                }).sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0)
+            });
+        });
+    });
+    db.close();
 });
 
 app.use("/api", require("./api.js"));
+
+app.all("*", (req,res)=>{
+    sendError(req, res, 404);
+})
 
 app.listen(80);
 

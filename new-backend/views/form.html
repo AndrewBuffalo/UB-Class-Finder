@@ -60,10 +60,11 @@
         </select></p>
         <p>Location: <input type="text" name="room"></p>
         <p>Time: <input type="text" name="time" id="time"></p>
+        <p><label for="lectures_only">Lectures Only: <input type="radio" name="lectures_only" id="lectures_only" checked></label></p>
         <input type="submit" value="Submit!">
         <script>
-            let ts = new Date().toLocaleTimeString();
-            document.getElementById("time").value = ts.slice(0,ts.lastIndexOf(":")) + ts.slice(ts.lastIndexOf(":")+3);
+            let ts = new Date().toLocaleTimeString('en-US', {hour: "numeric", minute: "numeric"});
+            document.getElementById("time").value = ts
         </script>
     </form>
     <script>
