@@ -1,0 +1,21 @@
+.container-fluid{
+    width: 80%;
+}
+legend{
+    text-align: center;
+}
+.row{
+    justify-content: space-between;
+}
+form{
+    border: 1px solid rgba(0,0,0,0.4);
+    padding: 5px 8px;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form .btn{
+    width: 80%;
+}

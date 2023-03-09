@@ -4,45 +4,61 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        //- link(rel="stylesheet", href="/static/form.css")
+        script(src="/static/bootstrap/js/jquery.min.js")
+        script(src="/static/bootstrap/js/bootstrap.min.js") 
+        link(rel="stylesheet", href="/static/bootstrap/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/static/form.css")
         title Search for a Class
     body 
-        <a href="/favorites">Go to favorites</a>
-        .container 
-            fieldset
-                legend Search by Time
-                mixin day_selector(day_num)
-                    select(name="day"+day_num, id=day_num, hidden=(day_num>1))
-                        option(value="" default)
-                        option(value="M") Monday 
-                        option(value="T") Tuesday
-                        option(value="W") Wednesday
-                        option(value="R") Thursday
-                        option(value="F") Friday
-                        option(value="S") Saturday
-                form(action="/check")
-                    p Day of the Week: 
-                        -var i = 1;
-                        while (i <= 6)
-                            +day_selector(i++)
-                    p Room: 
-                        input(type="text" name="room")
-                    p Time: 
-                        input(type="text" name="time" id="time")
-                    p 
-                        label(for="lectures_only") Lectures Only:
-                            input(type="checkbox" name="lectures_only" id="lectures_only" checked)
-                    input(type="submit" value="Search")
-            span OR
-            fieldset 
-                legend Search by Class 
-                form(action="/getClass")
-                    p Course Code:
-                        input(type="text", name="code")
-                    p Course Name: 
-                        input(type="text" name="name")
-                    p 
-                        label(for="lectures_only") Lectures Only:
-                            input(type="checkbox" name="lectures_only" id="lectures_only" checked)
-                    input(type="submit" value="Search")
+        .container-fluid.mt-4
+            a(href="/favorites") Go to favorites
+            .row
+                .col-md-5
+                    form(action="/check") 
+                        legend Search by Time
+                        .form-group
+                            mixin day_selector(day_num)
+                                select(name="day"+day_num, id=day_num, hidden=(day_num>1))
+                                    option(value="" default)
+                                    option(value="M") Monday 
+                                    option(value="T") Tuesday
+                                    option(value="W") Wednesday
+                                    option(value="R") Thursday
+                                    option(value="F") Friday
+                                    option(value="S") Saturday
+                            p Day of the Week: 
+                                -var i = 1;
+                                while (i <= 6)
+                                    +day_selector(i++)
+                        .form-group.form-inline
+                            label(for="room") Room:&nbsp;
+                            input.form-control#room(type="text", name="room")
+                        .form-group.form-inline
+                            label(for="time") Time:&nbsp;
+                            input.form-control#time(type="text", name="time")
+                        .form-check
+                            input.form-check-input#lectures_only(type="checkbox", name="lectures_only" checked)
+                            label(for="lectures_only") Lectures only 
+                        .center
+                            input.btn.btn-success(type="submit" value="Search")
+                .col-md-1.d-flex(style="align-items: center;justify-content: center;")
+                    span OR
+                .col-md-5
+                    form(action="/getClass")
+                        legend Search by Class 
+                        p &nbsp;
+                        .form-group.form-inline
+                            label(for="code") Course Code:&nbsp;
+                            input.form-control#code(type="text", name="code")
+                        .form-group.form-inline
+                            label(for="name") Course Name:&nbsp;
+                            input.form-control#name(type="text", name="name")
+                        .form-check
+                            input.form-check-input#lectures_only(type="checkbox", name="lectures_only" checked)
+                            label(for="lectures_only") Lectures only 
+                        .center
+                            input.btn.btn-success(type="submit" value="Search")
         script(src="/static/scripts/form.js") 
+
+
+//- Question: Should add search by both forms?
