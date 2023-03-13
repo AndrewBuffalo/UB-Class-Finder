@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 require("dotenv/config");
+
 function verifyToken(req,res,next){
 	req.anonymous = true;
 	req.JWTBody = {};
@@ -7,11 +8,11 @@ function verifyToken(req,res,next){
 		next();
 	} else {
 		if(typeof req.cookies.token !== 'undefined'){
-			jwt.verify(req.cookies.token, process.env.KEY, function(err, decoded) {
-				req.anonymous = false;
+			jwt.verify(req.cookies.token, process.env.SECRET, function(err, decoded) {
 				if(err){
-					res.status(403).send("Invalid token");
+					console.error(err);
 				} else {
+					req.anonymous = false;
 					req.JWTBody = decoded;
 					next();
 				}

@@ -81,14 +81,13 @@ if __name__ == "__main__":
         "Room" TEXT,
         "Location" TEXT,
         "Instructors" TEXT,
-        "Status" TEXT,
-        "isFavorite" BIT
+        "Status" TEXT
     )
     ''')
     for dept in DEPARTMENTS:
         cur.execute("begin")
         for course in getCoursesInDept(dept):
-            cur.execute('''INSERT INTO classes (Class,Course,Title,Section,Type,Days,Time,Room,Location,Instructors,Status,isFavorite) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)''',(course['Class'],course['Course'],course['Title'],course['Section'],course['Type'],course['Days'],course['Time'],course['Room'],course['Location'],course['Instructor (*) additional instructors'],course['Status'],0))
+            cur.execute('''INSERT INTO classes (Class,Course,Title,Section,Type,Days,Time,Room,Location,Instructors,Status) VALUES (?,?,?,?,?,?,?,?,?,?,?)''',(course['Class'],course['Course'],course['Title'],course['Section'],course['Type'],course['Days'],course['Time'],course['Room'],course['Location'],course['Instructor (*) additional instructors'],course['Status']))
         conn.execute("commit")
         print(f"Inserted courses in {dept=}")
     print("Done!")

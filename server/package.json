@@ -7,5 +7,24 @@
     "jsonwebtoken": "^9.0.0",
     "pug": "^3.0.2",
     "sqlite3": "^5.1.4"
-  }
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server for UB-Class-Finder",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewBuffalo/UB-Class-Finder.git"
+  },
+  "author": "Jack Dunfey",
+  "license": "CC BY-NC-SA 4.0",
+  "bugs": {
+    "url": "https://github.com/AndrewBuffalo/UB-Class-Finder/issues"
+  },
+  "homepage": "https://github.com/AndrewBuffalo/UB-Class-Finder#readme"
 }

@@ -6,8 +6,8 @@ html(lang="en")
         title Login
     body 
         .login-page 
-            form.form(action="/login")
-                input#username(type="text", name="username")
+            form.form(action="/login" method="POST")
+                input#username(type="text", name="username", placeholder="username")
                 input#password(type="password", name="password", placeholder="password")
                 button Login 
                 p.message Not registered? 

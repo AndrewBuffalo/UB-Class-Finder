@@ -10,6 +10,7 @@ html(lang="en")
     body 
         .container-fluid.pt-4
             unless anon
+                span Welcome back, !{username}! 
                 a(href="/favorites") Go to favorites
             else
                 a(href="/login") Sign in to save classes

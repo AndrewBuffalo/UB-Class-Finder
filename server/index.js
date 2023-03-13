@@ -38,7 +38,8 @@ app.set('view engine', 'pug');
 app.get("/", verifyToken, (req,res)=>{
     res.render("form", {
         jwt: req.JWTBody,
-        anon: req.anonymous
+        anon: req.anonymous,
+        username: req.JWTBody?.username
     });
 });
 
@@ -55,7 +56,33 @@ function sendError(req, res, error_code){
 }
 
 app.get("/favorites", verifyToken, (req,res)=>{
-    sendError(req, res, 401);
+    if(req.anonymous)
+        res.redirect("/login?goto=/favorites");
+    const db = new sql.Database('./users.sqlite');
+    db.serialize(() => {
+        db.get(`SELECT * FROM users WHERE username="${req.JWTBody.username}"`, (err, user) => {
+            if(err)
+                throw err;
+            const class_ids = user.favorites.split("|").map(getIdentifierFromCourseID);
+            const classDB = new sql.Database("./ub_classes.sqlite");
+            classDB.serialize(() => {
+                // very inefficient
+                classDB.all(`SELECT * FROM classes`, (err, classes)=>{
+                    if(err)
+                        throw err;
+                    classes.filter(course=>
+                        class_ids.some(identifiers=>{
+                            for(let [key,value] of Object.entries(identifiers))
+                                if(course[key] == value)
+                                    return false;
+                        })
+                    )
+                })
+            });
+            classDB.close();
+        });
+    });
+    db.close();
 });
 app.put("/add", verifyToken, (req,res)=>{
     sendError(req, res, 401);

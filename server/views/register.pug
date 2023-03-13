@@ -7,7 +7,7 @@ html(lang="en")
     body 
         .login-page 
             .form 
-                form.register-form(action="/register")
+                form.register-form(action="/register" method="POST")
                     input#name(type="text" name="username" placeholder="Username")
                     input(type="email" name="email" placeholder="Email address")
                     input(type="password" name="password" placeholder="password")
