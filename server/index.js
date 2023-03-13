@@ -66,7 +66,7 @@ app.get("/favorites", verifyToken, (req,res)=>{
             const class_ids = user.favorites.split("|").map(getIdentifierFromCourseID);
             const classDB = new sql.Database("./ub_classes.sqlite");
             classDB.serialize(() => {
-                // very inefficient
+                // very inefficient (filter in SQL query)
                 classDB.all(`SELECT * FROM classes`, (err, classes)=>{
                     if(err)
                         throw err;

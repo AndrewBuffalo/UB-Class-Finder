@@ -17,10 +17,6 @@ function withinTimeRange(inputString, stringRange){
     let times = stringRange.split(" - ").map(x=>timeToNumber(x));
     let input = timeToNumber(inputString);
     return times[0] <= input && input <= times[1];
-    // let times = stringRange.split(" - ").map(x=>stringToTime(x));
-    // let input = stringToTime(inputString);
-    // return input[0] > times[0][0] && input[0] < times[1][0] || input[0] == times[0][0] && input[1] >= times[0][1] || input[0] == times[1][0] && input[1] <= times[1][1];
-
 }
 
 function timeToNumber(timeString){
