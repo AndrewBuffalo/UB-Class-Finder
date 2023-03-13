@@ -6,12 +6,11 @@ html(lang="en")
         title Login
     body 
         .login-page 
-            .form 
-                form.register-form(action="/register" method="POST")
-                    input#name(type="text" name="username" placeholder="Username")
-                    input(type="email" name="email" placeholder="Email address")
-                    input(type="password" name="password" placeholder="password")
-                    button Create Account
-                    p.message Already registered? 
-                        a(href="/login") Sign In
-                </form>
+            form.form.register-form(action="/register" method="POST")
+                input#name(type="text" name="username" placeholder="Username")
+                input(type="email" name="email" placeholder="Email address")
+                input(type="password" name="password" placeholder="password")
+                input(type="hidden", name="goto", value=redirect_url)
+                button Create Account
+                p.message Already registered? 
+                    a(href="/login") Sign In

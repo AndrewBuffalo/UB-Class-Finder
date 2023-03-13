@@ -28,13 +28,13 @@ html(lang="en")
                     th Status
                 each match in matches
                     tr
-                        td.btn= match.isFavorite ? "-" : "+"
+                        td.btn(data-class-id=match.id)= match.isFavorite ? "-" : "+"
                         td(hidden)= match.Class
                         td= match.Type
-                        td= match.Course
+                        td(name="Course")= match.Course
                         td!= match.Title
                         td= match.Instructors
-                        td= match.Section
+                        td(name="Section")= match.Section
                         td= match.Days 
                         td= match.Room
                         td= match.Time
@@ -43,4 +43,7 @@ html(lang="en")
             p No classes found
         if anon
             a(href=`/login?goto=${url}` anonymous="true" hidden) Sign in to save classes
-        script(src="/static/scripts/script.js") 
+        unless anon
+            script(src="/static/scripts/favorites.js")
+        else
+            script(src="/static/scripts/anonymous_results.js") 

@@ -9,7 +9,7 @@ html(lang="en")
             form.form(action="/login" method="POST")
                 input#username(type="text", name="username", placeholder="username")
                 input#password(type="password", name="password", placeholder="password")
+                input(type="hidden", name="goto", value=redirect_url)
                 button Login 
                 p.message Not registered? 
                     a(href="/register") Create an account
-        </div>

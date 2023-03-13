@@ -41,51 +41,57 @@ app.get("/", verifyToken, (req,res)=>{
     });
 });
 
-function getIdentifierFromCourseID(id){
-    if(!isNaN(id))
-        return {Class: id};
-    let [a,b] = id.split("||");
-    return {Course: a, Section: b};
-}
-
 // Add user db for favoriting
 function sendError(req, res, error_code){
-    res.render("error", {error_code});
+    res.status(error_code).render("error", {error_code});
 }
 
 app.get("/favorites", verifyToken, (req,res)=>{
     if(req.anonymous)
         res.redirect("/login?goto=/favorites");
-    res.end();
+    const userDB = new Database('./users.sqlite');
+    const favoriteIds = userDB.prepare("SELECT favorites FROM users WHERE username=?").get(req.JWTBody.username).favorites.split(",");
+    userDB.close();
+    const classDB = new Database("./ub_classes.sqlite");
+    const favorites = 
+    res.render("results", {
+        matches: classDB.prepare(`SELECT * FROM classes WHERE id IN (${favoriteIds.map(id=>`'${id}'`).join(", ")})`).all(),
+        anon: req.anonymous,
+        url: encodeURIComponent(req.originalUrl)
+    })
+    res.json(favorites);
 });
 
-app.put("/add", verifyToken, (req,res)=>{
+app.put("/favorites", verifyToken, (req,res)=>{
     if(req.anonymous)
         return res.sendStatus(401);
     const db = new Database('./users.sqlite');
     let class_id = req.query.class_id;
-    db.serialize(() => {
-        db.get("SELECT favorites FROM users WHERE username=?", [req.JWTBody.username], (err, {favorites}) => {
-            if(err)
-                throw err;
-            let faves = favorites ? favorites.split("|") : [];
-            if(!faves.includes(class_id)){  
-                faves.push(class_id);
-                db.run("UPDATE users SET favorites=? WHERE username=?", [faves.join("|"), req.JWTBody.username], (err)=>{
-                    if(err)
-                        throw err;
-                    res.sendStatus(200);
-                    db.close();
-                });
-            }
-        });
-    });
+    let favorites = db.prepare("SELECT favorites FROM users WHERE username=?").get(req.JWTBody.username).favorites;
+    if(favorites === "" || favorites == undefined){
+        favorites = class_id;
+    } else {
+        if(!favorites.split(",").some(fav=>fav===class_id))
+        favorites += "," + class_id;
+    }
+    db.prepare("UPDATE users SET favorites=? WHERE username=?").run(favorites, req.JWTBody.username);
+    res.json({success: true});
 });
-app.delete("/remove", verifyToken, (req,res)=>{
-    sendError(req, res, 401);
+app.delete("/favorites", verifyToken, (req,res)=>{
+    if(req.anonymous)
+        return res.sendStatus(401);
+    const db = new Database('./users.sqlite');
+    let class_id = req.query.class_id;
+    let favorites = db.prepare("SELECT favorites FROM users WHERE username=?").get(req.JWTBody.username).favorites;
+    if(favorites === "" || favorites == undefined)
+        return res.status(400).json({success: false, error: "No favorites to remove"});
+    let queryString = "," + class_id;
+    let index = favorites.indexOf(queryString);
+    db.prepare("UPDATE users SET favorites=? WHERE username=?").run(favorites.slice(0, index) + favorites.slice(index + queryString.length), req.JWTBody.username);
+    res.json({success: true});
 });
 
-app.get("/check", (req,res)=>{
+app.get("/check", verifyToken, (req,res)=>{
     let days = new Array(5).fill(0).map((_,i)=>req.query[`day${i+1}`].toUpperCase()).filter(x=>x!==""),
         room = req.query.room.toUpperCase(),
         lectures_only = req.query.lectures_only,
@@ -98,18 +104,18 @@ app.get("/check", (req,res)=>{
     db.close();
     res.render("results", {
         matches,
-        url: req.riginalUrl,
+        url: encodeURIComponent(req.originalUrl),
         anon: req.anonymous
     });
 });
 
-app.get("/getClass", (req,res)=>{
+app.get("/getClass", verifyToken, (req,res)=>{
     const db = new Database('./ub_classes.sqlite');
     const matches = db.prepare(`SELECT * FROM classes WHERE Title LIKE '%${req.query.name.toLowerCase()}%' AND Course LIKE '%${req.query.code.toUpperCase()}%' ${req.query.lectures_only ? "AND Type == 'LEC'" : ""}`).all()
         .sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0);
     res.render("results", {
         matches,
-        url: req.riginalUrl,
+        url: encodeURIComponent(req.originalUrl),
         anon: req.anonymous
     });
     db.close();
@@ -125,3 +131,4 @@ app.all("*", (req,res)=>{
 app.listen(80);
 
 // TODO: Change Time from TEXT to start TIME and end TIME
+// TODO: Make sure optional query parameters are not undefined

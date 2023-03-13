@@ -71,6 +71,7 @@ if __name__ == "__main__":
     cur.execute('DROP TABLE IF EXISTS classes')
     cur.execute('''
     CREATE TABLE "classes"(
+        "id" TEXT PRIMARY KEY,
         "Class" TEXT,
         "Course" TEXT,
         "Title" TEXT,
@@ -85,9 +86,12 @@ if __name__ == "__main__":
     )
     ''')
     for dept in DEPARTMENTS:
-        cur.execute("begin")
+        cur.execute("BEGIN")
         for course in getCoursesInDept(dept):
-            cur.execute('''INSERT INTO classes (Class,Course,Title,Section,Type,Days,Time,Room,Location,Instructors,Status) VALUES (?,?,?,?,?,?,?,?,?,?,?)''',(course['Class'],course['Course'],course['Title'],course['Section'],course['Type'],course['Days'],course['Time'],course['Room'],course['Location'],course['Instructor (*) additional instructors'],course['Status']))
-        conn.execute("commit")
+            if course['Class'] == "Class":
+                continue
+            key = course['Class'] if course['Class'].isnumeric() else course['Course']+"-"+course['Section']
+            cur.execute('''INSERT INTO classes (id,Class,Course,Title,Section,Type,Days,Time,Room,Location,Instructors,Status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)''',(key,course['Class'],course['Course'],course['Title'],course['Section'],course['Type'],course['Days'],course['Time'],course['Room'],course['Location'],course['Instructor (*) additional instructors'],course['Status']))
+        conn.execute("COMMIT")
         print(f"Inserted courses in {dept=}")
-    print("Done!")
+    print("Done!") 

@@ -8,24 +8,31 @@ const bcrypt = require("bcrypt");
 require("dotenv/config");
 
 router.get("/login", verifyToken, (req,res)=>{
+    const redirect_url = req.query.goto ? decodeURIComponent(req.query.goto) : "/";
     if(!req.anonymous){
-        res.redirect(req.query.goto||"/");
+        res.redirect(redirect_url);
     } else {
-        res.render("login");
+        res.render("login", {
+            redirect_url
+        });
     }
 });
 
 router.get("/register", verifyToken, (req,res)=>{
+    const redirect_url = req.query.goto ? decodeURIComponent(req.query.goto) : "/";
     if(!req.anonymous){
-        res.redirect(req.query.goto||"/");
+        res.redirect(redirect_url);
     } else {
-        res.render("register");
+        res.render("register", {
+            redirect_url
+        });
     }
 });
 
 router.post("/login", (req, res) => {
     const db = new sql.Database('./users.sqlite');
     let { username, password } = req.body;
+    console.log(req.body);
     db.serialize(() => {
         db.all(`SELECT * FROM users WHERE username = "${username}"`, (err, [user]) => {
             if(err)
@@ -37,7 +44,7 @@ router.post("/login", (req, res) => {
             jwt.sign({ username }, process.env.SECRET, (err, token)=>{
                 if(err)
                     throw err;
-                res.cookie("token", token).redirect(req.query.goto ?? "/");
+                res.cookie("token", token).redirect(req.body.goto ? decodeURIComponent(req.body.goto) : "/");
             });
         });
     });
@@ -58,7 +65,7 @@ router.post("/register", (req, res) => {
                 jwt.sign({ username }, process.env.SECRET, (err, token)=>{
                     if(err)
                     res.status(500).send(err);
-                    res.cookie("token", token).redirect(req.query.goto ?? "/");
+                    res.cookie("token", token).redirect(req.body.goto ? decodeURIComponent(req.body.goto) : "/");
                 });
                 db.close(); 
             });

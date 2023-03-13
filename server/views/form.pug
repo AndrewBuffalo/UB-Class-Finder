@@ -9,11 +9,14 @@ html(lang="en")
         title Search for a Class
     body 
         .container-fluid.pt-4
-            unless anon
-                span Welcome back, !{username}! 
-                a(href="/favorites") Go to favorites
-            else
-                a(href="/login") Sign in to save classes
+            .row
+                .col-md-5
+                    unless anon
+                        span Welcome back, !{username}! 
+                        a(href="/favorites") Go to favorites
+                    else
+                        a(href="/login") Sign in to save classes
+                .col-md-6.d-none.d-md-block 
             .row
                 .col-md-5
                     form(action="/check") 

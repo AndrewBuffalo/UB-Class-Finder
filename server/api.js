@@ -26,10 +26,25 @@ function getOpenRoomsByCampus(campus="North"){
 }
 
 const express = require("express");
+const verifyToken = require("./verifyToken.js");
 const api = new express.Router();
 
 api.use(express.urlencoded({extended:true}));
 api.use(express.json());
+
+api.get("/favorites", verifyToken, (req, res) => {
+    if(req.anonymous) // bad practice
+        return res.status(401).json({error: "You must be logged in to use this feature."});
+    const db = new sql.Database('./users.sqlite');
+    db.serialize(() => {
+        db.get(`SELECT favorites FROM users WHERE username='${req.JWTBody.username}'`, (err, {favorites}) => {
+            if(err)
+                throw err;
+            res.json(favorites.split(","));
+        });
+    });
+    db.close();
+});
 
 api.get("/:campus", (req,res)=>{
     let campus = req.params.campus;
