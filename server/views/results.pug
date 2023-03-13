@@ -32,7 +32,7 @@ html(lang="en")
                         td(hidden)= match.Class
                         td= match.Type
                         td= match.Course
-                        td= match.Title
+                        td!= match.Title
                         td= match.Instructors
                         td= match.Section
                         td= match.Days 
@@ -40,5 +40,7 @@ html(lang="en")
                         td= match.Time
                         td.collapse(class=match.Status.replace(" w/ ", "_").toLowerCase())= match.Status
         else 
-            p No classes
+            p No classes found
+        if anon
+            a(href=`/login?goto=${url}` anonymous="true" hidden) Sign in to save classes
         script(src="/static/scripts/script.js") 

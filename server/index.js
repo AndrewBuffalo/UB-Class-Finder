@@ -63,6 +63,10 @@ app.get("/favorites", verifyToken, (req,res)=>{
         db.get(`SELECT * FROM users WHERE username="${req.JWTBody.username}"`, (err, user) => {
             if(err)
                 throw err;
+            if(!user)
+                return sendError(req, res, 401);
+            if(!user.favorites)
+                return res.render("favorites", {favorites: []});
             const class_ids = user.favorites.split("|").map(getIdentifierFromCourseID);
             const classDB = new sql.Database("./ub_classes.sqlite");
             classDB.serialize(() => {
@@ -70,13 +74,13 @@ app.get("/favorites", verifyToken, (req,res)=>{
                 classDB.all(`SELECT * FROM classes`, (err, classes)=>{
                     if(err)
                         throw err;
-                    classes.filter(course=>
+                    res.json(classes.filter(course=>
                         class_ids.some(identifiers=>{
                             for(let [key,value] of Object.entries(identifiers))
                                 if(course[key] == value)
                                     return false;
                         })
-                    )
+                    ));
                 })
             });
             classDB.close();
@@ -85,7 +89,26 @@ app.get("/favorites", verifyToken, (req,res)=>{
     db.close();
 });
 app.put("/add", verifyToken, (req,res)=>{
-    sendError(req, res, 401);
+    if(req.anonymous)
+        return res.sendStatus(401);
+    const db = new sql.Database('./users.sqlite');
+    let class_id = req.query.class_id;
+    db.serialize(() => {
+        db.get("SELECT favorites FROM users WHERE username=?", [req.JWTBody.username], (err, {favorites}) => {
+            if(err)
+                throw err;
+            let faves = favorites ? favorites.split("|") : [];
+            if(!faves.includes(class_id)){  
+                faves.push(class_id);
+                db.run("UPDATE users SET favorites=? WHERE username=?", [faves.join("|"), req.JWTBody.username], (err)=>{
+                    if(err)
+                        throw err;
+                    res.sendStatus(200);
+                    db.close();
+                });
+            }
+        });
+    });
 });
 app.delete("/remove", verifyToken, (req,res)=>{
     sendError(req, res, 401);
@@ -109,7 +132,9 @@ app.get("/check", (req,res)=>{
                         isRoom = course.Room.includes(room),
                         isTime = time ? (!/[^APM\-0-9:\s]+/g.test(course.Time) ? withinTimeRange(time, course.Time) : false) : true;
                     return isDay && isRoom && isTime;
-                }).sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0)
+                }).sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0),
+                url: req.riginalUrl,
+                anon: req.anonymous
             });
         });
     });
@@ -130,7 +155,9 @@ app.get("/getClass", (req,res)=>{
                     if(lectures_only && course.Type != "LEC")
                         return false;
                     return course.Course.includes(code) && (course.Title.toLowerCase().includes(name) || name.includes(course.Title.toLowerCase()));
-                }).sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0)
+                }).sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0),
+                url: req.riginalUrl,
+                anon: req.anonymous
             });
         });
     });

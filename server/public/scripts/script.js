@@ -1,3 +1,8 @@
+var x;
+if(x = document.querySelector("a[anonymous='true']")){
+    window.anonymous = true;
+    x.click();
+}
 for(let btn of document.querySelectorAll("td.btn")){
     btn.addEventListener("click", function(e){
         let tr = e.target.parentElement;
