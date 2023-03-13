@@ -93,8 +93,8 @@ app.delete("/favorites", verifyToken, (req,res)=>{
 
 app.get("/check", verifyToken, (req,res)=>{
     let days = new Array(5).fill(0).map((_,i)=>req.query[`day${i+1}`].toUpperCase()).filter(x=>x!==""),
-        room = req.query.room.toUpperCase(),
-        lectures_only = req.query.lectures_only,
+        room = req.query.room?.toUpperCase() ?? "",
+        lectures_only = !!req.query.lectures_only,
         time = req.query.time != "" ? req.query.time.toUpperCase() : null;
     let day_filter = days.map(day=>`Days LIKE '%${day}%'`).join(" OR ");
     const db = new Database('./ub_classes.sqlite');

@@ -43,8 +43,8 @@ html(lang="en")
                             label(for="time") Time:&nbsp;
                             input.form-control#time(type="text", name="time")
                         .form-check
-                            input.form-check-input#lectures_only(type="checkbox", name="lectures_only" checked)
-                            label(for="lectures_only") Lectures only 
+                            input.form-check-input#lectures_only_time(type="checkbox", name="lectures_only" checked)
+                            label(for="lectures_only_time") Lectures only 
                         .center
                             input.btn.btn-success(type="submit" value="Search")
                 .col-md-1.d-flex(style="align-items: center;justify-content: center;")
@@ -60,8 +60,8 @@ html(lang="en")
                             label(for="name") Course Name:&nbsp;
                             input.form-control#name(type="text", name="name")
                         .form-check
-                            input.form-check-input#lectures_only(type="checkbox", name="lectures_only" checked)
-                            label(for="lectures_only") Lectures only 
+                            input.form-check-input#lectures_only_class(type="checkbox", name="lectures_only" checked)
+                            label(for="lectures_only_class") Lectures only 
                         .center
                             input.btn.btn-success(type="submit" value="Search")
         script(src="/static/scripts/form.js") 

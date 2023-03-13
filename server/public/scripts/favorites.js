@@ -8,8 +8,8 @@ fetch("/api/favorites").then(res=>res.json()).then(data=>{
 for(let btn of document.querySelectorAll("td.btn")){
     btn.addEventListener("click", function(e){
         let tr = e.target.parentElement;
-        let class_id = tr.children[1].textContent;
-        class_id = isNaN(class_id) ? `${tr.children[3].textContent}-${tr.children[6].textContent}` : class_id;
+        let class_id = e.target.dataset.classId
+        // let class_id = tr.querySelector("td[data-class-id]").dataset.classId;
         if(e.target.textContent === "+"){
             fetch(`/favorites?class_id=${class_id}`, {method: "PUT"});
         } else {

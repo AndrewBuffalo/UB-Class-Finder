@@ -18,23 +18,23 @@ html(lang="en")
                 tr 
                     th +
                     th Type
-                    th Course Code
-                    th Course Name 
+                    th Course
+                    th Title 
                     th Instructor(s)
                     th Section
-                    th Course Days 
-                    th Course Room
+                    th Days 
+                    th Room
                     th Time
                     th Status
                 each match in matches
                     tr
-                        td.btn(data-class-id=match.id)= match.isFavorite ? "-" : "+"
-                        td(hidden)= match.Class
+                        td.btn(data-class-id=match.id)= decodeURIComponent(url).startsWith("/favorites") ? "-" : "+"
+                        td(hidden)= match.id
                         td= match.Type
-                        td(name="Course")= match.Course
+                        td= match.Course
                         td!= match.Title
                         td= match.Instructors
-                        td(name="Section")= match.Section
+                        td= match.Section
                         td= match.Days 
                         td= match.Room
                         td= match.Time

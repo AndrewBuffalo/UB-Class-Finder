@@ -64,7 +64,7 @@ router.post("/register", (req, res) => {
                     throw err;
                 jwt.sign({ username }, process.env.SECRET, (err, token)=>{
                     if(err)
-                    res.status(500).send(err);
+                        res.status(500).send(err);
                     res.cookie("token", token).redirect(req.body.goto ? decodeURIComponent(req.body.goto) : "/");
                 });
                 db.close(); 
