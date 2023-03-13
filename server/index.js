@@ -15,9 +15,7 @@ Array.prototype.indexOfObject = function(obj){
     return -1;
 }
 
-const sql = require("sqlite3");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const Database = require("better-sqlite3");
 
 const {withinTimeRange, timeToNumber} = require("./time.js");
 const areSame = require("./areSame.js");
@@ -58,40 +56,13 @@ function sendError(req, res, error_code){
 app.get("/favorites", verifyToken, (req,res)=>{
     if(req.anonymous)
         res.redirect("/login?goto=/favorites");
-    const db = new sql.Database('./users.sqlite');
-    db.serialize(() => {
-        db.get(`SELECT * FROM users WHERE username="${req.JWTBody.username}"`, (err, user) => {
-            if(err)
-                throw err;
-            if(!user)
-                return sendError(req, res, 401);
-            if(!user.favorites)
-                return res.render("favorites", {favorites: []});
-            const class_ids = user.favorites.split("|").map(getIdentifierFromCourseID);
-            const classDB = new sql.Database("./ub_classes.sqlite");
-            classDB.serialize(() => {
-                // very inefficient (filter in SQL query)
-                classDB.all(`SELECT * FROM classes`, (err, classes)=>{
-                    if(err)
-                        throw err;
-                    res.json(classes.filter(course=>
-                        class_ids.some(identifiers=>{
-                            for(let [key,value] of Object.entries(identifiers))
-                                if(course[key] == value)
-                                    return false;
-                        })
-                    ));
-                })
-            });
-            classDB.close();
-        });
-    });
-    db.close();
+    res.end();
 });
+
 app.put("/add", verifyToken, (req,res)=>{
     if(req.anonymous)
         return res.sendStatus(401);
-    const db = new sql.Database('./users.sqlite');
+    const db = new Database('./users.sqlite');
     let class_id = req.query.class_id;
     db.serialize(() => {
         db.get("SELECT favorites FROM users WHERE username=?", [req.JWTBody.username], (err, {favorites}) => {
@@ -115,51 +86,31 @@ app.delete("/remove", verifyToken, (req,res)=>{
 });
 
 app.get("/check", (req,res)=>{
-    const db = new sql.Database('./ub_classes.sqlite');
-    db.serialize(() => {
-        db.all(`SELECT * FROM classes`, (err, courses) => {
-            if(err)
-                throw err;
-            let days = new Array(5).fill(0).map((_,i)=>req.query[`day${i+1}`].toUpperCase()),
-                room = req.query.room.toUpperCase(),
-                time = req.query.time != "" ? req.query.time.toUpperCase() : null,
-                lectures_only = req.query.lectures_only;
-            res.render("results", {
-                matches: courses.filter(course=>{
-                    if(lectures_only && !course.Type.includes("LEC"))
-                        return false;
-                    let isDay = days.every(day=>course.Days.includes(day)),
-                        isRoom = course.Room.includes(room),
-                        isTime = time ? (!/[^APM\-0-9:\s]+/g.test(course.Time) ? withinTimeRange(time, course.Time) : false) : true;
-                    return isDay && isRoom && isTime;
-                }).sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0),
-                url: req.riginalUrl,
-                anon: req.anonymous
-            });
-        });
-    });
+    let days = new Array(5).fill(0).map((_,i)=>req.query[`day${i+1}`].toUpperCase()).filter(x=>x!==""),
+        room = req.query.room.toUpperCase(),
+        lectures_only = req.query.lectures_only,
+        time = req.query.time != "" ? req.query.time.toUpperCase() : null;
+    let day_filter = days.map(day=>`Days LIKE '%${day}%'`).join(" OR ");
+    const db = new Database('./ub_classes.sqlite');
+    const matches = db.prepare(`SELECT * FROM classes WHERE ${day_filter ? day_filter + " AND " : ""} Room LIKE '%${room}%' ${lectures_only ? "AND Type == 'LEC'" : ""}`).all()
+        .filter(course=>time ? (!/[^APM\-0-9:\s]+/g.test(course.Time) ? withinTimeRange(time, course.Time) : false) : true)
+        .sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0);
     db.close();
+    res.render("results", {
+        matches,
+        url: req.riginalUrl,
+        anon: req.anonymous
+    });
 });
 
 app.get("/getClass", (req,res)=>{
-    const db = new sql.Database('./ub_classes.sqlite');
-    db.serialize(() => {
-        db.all(`SELECT * FROM classes`, (err, courses) => {
-            if(err)
-                throw err;
-            let name = req.query.name.toLowerCase(),
-                code = req.query.code.toUpperCase(),
-                lectures_only = req.query.lectures_only;
-            res.render("results", {
-                matches: courses.filter(course=>{
-                    if(lectures_only && course.Type != "LEC")
-                        return false;
-                    return course.Course.includes(code) && (course.Title.toLowerCase().includes(name) || name.includes(course.Title.toLowerCase()));
-                }).sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0),
-                url: req.riginalUrl,
-                anon: req.anonymous
-            });
-        });
+    const db = new Database('./ub_classes.sqlite');
+    const matches = db.prepare(`SELECT * FROM classes WHERE Title LIKE '%${req.query.name.toLowerCase()}%' AND Course LIKE '%${req.query.code.toUpperCase()}%' ${req.query.lectures_only ? "AND Type == 'LEC'" : ""}`).all()
+        .sort((a,b)=>!/[^APM\-0-9:\s]+/g.test(a.Time) ? (!/[^APM\-0-9:\s]+/g.test(b.Time) ? (timeToNumber(a.Time.split(" - ")[0]) - timeToNumber(b.Time.split(" - ")[0])) : -1) : !/[^APM\-0-9:\s]+/g.test(b.Time) ? 1 : 0);
+    res.render("results", {
+        matches,
+        url: req.riginalUrl,
+        anon: req.anonymous
     });
     db.close();
 });
@@ -173,5 +124,4 @@ app.all("*", (req,res)=>{
 
 app.listen(80);
 
-
-// TODO: Make backend work with new database format
+// TODO: Change Time from TEXT to start TIME and end TIME
